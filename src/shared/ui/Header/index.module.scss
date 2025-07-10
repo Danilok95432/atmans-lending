@@ -1,9 +1,62 @@
 .header {
+  padding: 40px 0;
   .headerRow {
     .infoBlock {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 0 auto 0 20px;
       .dates {
         color: #CC1746;
         font-size: 20px;
+        border: 1px solid #CC1746;
+        padding: 8px 10px;
+        border-radius: 5px;
+      }
+      p {
+        font-size: 20px;
+        span {
+          color: #CC1746;
+        }
+      }
+      .starts {
+        font-size: 15px;
+      }
+    }
+    .controlsRow {
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      .enterLK {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border: none;
+        font-size: 20px;
+        color: #CC1746;
+        gap: 10px;
+        .vector {
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          background: #CC1746;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    .linksRow {
+      gap: 15px;
+      .linkEl {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        span {
+          font-size: 13px;
+          color: #CC1746;
+          padding-top: 2px;
+        }
       }
     }
   }

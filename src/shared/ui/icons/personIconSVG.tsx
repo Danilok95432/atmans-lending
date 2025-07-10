@@ -1,6 +1,6 @@
 export const PersonIconSvg = () => {
 	return (
-		<svg width='16' height='19' viewBox='0 0 16 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
+		<svg width='12' height='14' viewBox='0 0 16 19' fill='none' xmlns='http://www.w3.org/2000/svg'>
 			<path
 				d='M8.05993 9.78393C10.7056 9.78393 12.8503 7.63788 12.8503 4.9906C12.8503 2.34331 10.7056 0.197266 8.05993 0.197266C5.41427 0.197266 3.26953 2.34331 3.26953 4.9906C3.26953 7.63788 5.41427 9.78393 8.05993 9.78393Z'
 				fill='white'
