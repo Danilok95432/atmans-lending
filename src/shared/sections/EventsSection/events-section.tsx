@@ -1,14 +1,14 @@
+import { Section } from 'src/shared/ui/Section/section'
 import { Container } from '../../ui/Container/Container'
 import styles from './index.module.scss'
-import baseStyles from 'src/assets/base/styles/base-sections.scss'
 import cn from 'classnames'
 
 export const EventsSection = () => {
-  return(
-    <section className={cn(styles.events, baseStyles.baseSection)}>
-      <Container>
-        <div></div>
-      </Container>
-    </section>
-  )
+	return (
+		<Section className={cn(styles.events)}>
+			<Container>
+				<div></div>
+			</Container>
+		</Section>
+	)
 }
