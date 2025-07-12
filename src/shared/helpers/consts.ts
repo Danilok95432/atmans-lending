@@ -9,11 +9,15 @@ export enum ReducerPath {
 	Games = 'games/api',
 	Videos = 'videos/api',
 	Search = 'search/api',
+	Vids = 'vids/api',
+	Heroes = 'heroes/api',
+	Cicles = 'cicles/api',
 }
 
 export const ImagesFormat = ['png', 'jpeg', 'jpg', 'webp', 'gif']
 export enum NameSpace {
 	BreadCrumbs = 'BREAD_CRUMBS',
+	Modal = 'MODAL',
 }
 
 export enum DisplayBreakpoints {
@@ -30,4 +34,4 @@ export enum DisplayBreakpoints {
 
 export const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4020/api/v1' // express js сервер
 export const PROD_URL = '/api' // для локальной разработки
-export const MAIN_PROD_URL = 'https://auapi.npotau.ru' // для выкладки на vercel
+export const MAIN_PROD_URL = 'https://etnosportapi.npotau.ru' // для выкладки на vercel

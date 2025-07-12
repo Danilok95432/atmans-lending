@@ -1,0 +1,43 @@
+.program {
+  width: 100%;
+  .programWrapper {
+    flex-direction: column;
+    gap: 35px;
+    .programHeadRow {
+      gap: 50px;
+      align-items: center;
+      h1 {
+        font-size: 55px;
+        font-weight: 500;
+      }
+    }
+    .contentRow {
+      gap: 50px;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      h2 {
+        font-size: 28px;
+        font-weight: 500;
+        margin-bottom: 0;
+      }
+      .programSlider {
+        max-width: 60%;
+        margin: 0;
+      }
+      .programList {
+        flex-direction: column;
+        max-width: 100%;
+        .elRow {
+          gap: 15px;
+          align-items: center;
+          p {
+            font-size: 20px;
+          }
+          p:last-child {
+            color: #CC1746;
+          }
+        }
+      }
+    }
+  }
+}

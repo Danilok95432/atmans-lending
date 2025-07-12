@@ -6,7 +6,7 @@ type SlideNextSvgProps = {
 
 export const SlideNextSvg: FC<SlideNextSvgProps> = ({
 	variant = 'main',
-	color: propColor = '#ffffff',
+	color: propColor = '#000000',
 }) => {
 	const [isSmallScreen, setIsSmallScreen] = useState(false)
 
@@ -23,7 +23,7 @@ export const SlideNextSvg: FC<SlideNextSvgProps> = ({
 
 	let color = propColor
 
-	if (variant !== 'main-obj-slider') color = isSmallScreen ? '#ffffff' : propColor
+	if (variant !== 'main-obj-slider') color = isSmallScreen ? '#000000' : propColor
 	if (variant === 'gallery')
 		return (
 			<svg

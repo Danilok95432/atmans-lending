@@ -1,9 +1,25 @@
+import { Container } from '../Container/Container'
+import { FlexRow } from '../FlexRow/FlexRow'
+import { TgEventIconSVG } from '../icons/tgEventIconSVG'
+import { VkSocialSvg } from '../icons/vkSocialSVG'
 import styles from './index.module.scss'
 
 export const Footer = () => {
-  return(
-    <header className={styles.footer}>
-
-    </header>
-  )
+	return (
+		<footer className={styles.footer}>
+			<Container>
+				<FlexRow className={styles.footerRow}>
+					<p>Разработано и построено в НПО ТАУ</p>
+					<FlexRow className={styles.socialsRow}>
+						<button>
+							<VkSocialSvg />
+						</button>
+						<button>
+							<TgEventIconSVG />
+						</button>
+					</FlexRow>
+				</FlexRow>
+			</Container>
+		</footer>
+	)
 }

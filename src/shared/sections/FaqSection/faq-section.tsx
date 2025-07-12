@@ -1,14 +1,33 @@
+import { useGetFaqByIdQuery } from 'src/features/home/api/home.api'
 import { Container } from '../../ui/Container/Container'
 import styles from './index.module.scss'
-import baseStyles from 'src/assets/base/styles/base-sections.scss'
 import cn from 'classnames'
+import { Section } from 'src/shared/ui/Section/section'
+import { HomeFaqArrow } from 'src/shared/ui/icons/homeFaqArrow'
+import { AccordionItem } from 'src/widgets/accordion-item/accordion-item'
 
 export const FaqSection = () => {
-  return(
-    <section className={cn(styles.faq, baseStyles.baseSection)}>
-      <Container>
-        <div></div>
-      </Container>
-    </section>
-  )
+	const { data: faq } = useGetFaqByIdQuery('1')
+	console.log(faq)
+	return (
+		<Section className={cn(styles.faq)}>
+			<Container>
+				<h2>Часто задаваемые вопросы</h2>
+				<div className={styles.homeFaqList}>
+					{faq &&
+						[...faq]
+							.sort((a, b) => Number(a.id) - Number(b.id))
+							.map((faqEl) => (
+								<AccordionItem
+									className={styles.faqItem}
+									trigger={faqEl.title}
+									customArrow={<HomeFaqArrow />}
+									content={faqEl.content}
+									key={faqEl.id}
+								/>
+							))}
+				</div>
+			</Container>
+		</Section>
+	)
 }
