@@ -14,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './index.scss'
 import { ScrollToTop } from './widgets/scroll-to-top/scroll-to-top'
 import { store } from './app/store'
+import { Modal } from './features/modal/modal'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<Provider store={store}>
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 				<ScrollToTop />
 				<ToastContainer />
 				<App />
+				<Modal />
 			</BrowserRouter>
 		</HelmetProvider>
 	</Provider>,

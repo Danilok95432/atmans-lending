@@ -14,6 +14,7 @@ import { OrgsEventsSection } from 'src/shared/sections/OrgsEventsSection/orgs-ev
 import { VideosSection } from 'src/shared/sections/VideosSection/videos-section'
 import { SubEventsSection } from 'src/shared/sections/SubEventsSection/sub-events-section'
 import { ProgramSection } from 'src/shared/sections/ProgramSection/program-section'
+import { EventsSection } from 'src/shared/sections/EventsSection/events-section'
 
 export const HomePage = () => {
 	return (
@@ -27,6 +28,7 @@ export const HomePage = () => {
 			<GeneralPartnersSection />
 			<ProgramSection />
 			<PartnersSection />
+			<EventsSection />
 			<SubEventsSection />
 			<OrgsEventsSection />
 			<VideosSection />

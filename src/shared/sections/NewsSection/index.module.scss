@@ -21,8 +21,27 @@
 
 .newsSectionRow {
   justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.swiperNews {
+	@media (max-width: 440px) {
+		width: 300px!important;
+	}
 }
 
 .newsSliderBtns {
-	top: 65%;
+	top: 49%;
+	@media (max-width: 768px) {
+		top: 49%;
+	}
+	@media (max-width: 440px) {
+		top: 35%;
+		width: 90%;
+	}
+	button {
+		@media (max-width: 440px) {
+			background: #ffffff;
+		}
+	}
 }

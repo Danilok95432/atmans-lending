@@ -10,16 +10,18 @@ import { useGetEventVideosByIdQuery } from 'src/features/home/api/home.api'
 import { type RefObject, useRef } from 'react'
 import { VideoCard } from './components/video-card/video-card'
 import { homeVideosSliderOptions } from './consts'
+import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 
 export const VideosSection = () => {
 	const { data: videos } = useGetEventVideosByIdQuery('1')
+	const breakPoint = useBreakPoint()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 	return (
 		<Section className={cn(styles.videos)}>
 			<Container>
 				<FlexRow className={styles.videotapeSectionRow}>
 					<h2>Видеолента</h2>
-					<MainButton as='route' to={''}>
+					<MainButton as='route' to={`https://этноспорт.рф/videos`}>
 						Все видео
 					</MainButton>
 				</FlexRow>
@@ -31,7 +33,11 @@ export const VideosSection = () => {
 							</SwiperSlide>
 						))}
 					</Swiper>
-					<SliderBtns className={styles.videoSliderBtns} swiperRef={swiperRef} />
+					<SliderBtns
+						className={styles.videoSliderBtns}
+						swiperRef={swiperRef}
+						color={breakPoint === 'S' ? 'white' : 'black'}
+					/>
 				</div>
 			</Container>
 		</Section>

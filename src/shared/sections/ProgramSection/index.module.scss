@@ -3,12 +3,22 @@
   .programWrapper {
     flex-direction: column;
     gap: 35px;
+    @media (max-width: 768px) {
+      gap: 15px;
+    }
     .programHeadRow {
       gap: 50px;
       align-items: center;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 15px;
+      }
       h1 {
         font-size: 55px;
         font-weight: 500;
+        @media (max-width: 768px) {
+          font-size: 36px;
+        }
       }
     }
     .contentRow {
@@ -20,9 +30,17 @@
         font-weight: 500;
         margin-bottom: 0;
       }
+      .imgWrapper {
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
       .programSlider {
         max-width: 60%;
         margin: 0;
+        @media (max-width: 768px) {
+          max-width: 100%;
+        }
       }
       .programList {
         flex-direction: column;
@@ -30,11 +48,21 @@
         .elRow {
           gap: 15px;
           align-items: center;
+          @media (max-width: 768px) {
+            flex-direction: column;
+            align-items: start;
+          }
           p {
             font-size: 20px;
+            @media (max-width: 768px) {
+              font-size: 17px;
+            }
           }
           p:last-child {
             color: #CC1746;
+            @media (max-width: 768px) {
+              font-size: 17px;
+            }
           }
         }
       }

@@ -5,10 +5,15 @@ import styles from './index.module.scss'
 type SectionProps = {
 	className?: string
 	children: ReactNode
+	id?: string
 }
 
-export const Section: FC<SectionProps> = ({ className, children }) => {
+export const Section: FC<SectionProps> = ({ className, children, id }) => {
 	const combinedClassName = classNames(styles.section, className)
 
-	return <section className={combinedClassName}>{children}</section>
+	return (
+		<section id={id} className={combinedClassName}>
+			{children}
+		</section>
+	)
 }

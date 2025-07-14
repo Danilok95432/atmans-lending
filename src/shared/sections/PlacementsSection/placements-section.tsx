@@ -8,7 +8,7 @@ import { Placement } from 'src/widgets/placement/placement'
 export const PlacementsSection = () => {
 	const { data: eventInfo } = useGetEventByIdQuery('1')
 	return (
-		<Section className={cn(styles.pathways)}>
+		<Section id='placement' className={cn(styles.pathways)}>
 			<Container>
 				<div className={styles.mapTab}>
 					<h2>Размещение</h2>

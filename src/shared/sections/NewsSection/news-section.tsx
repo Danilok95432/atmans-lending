@@ -3,20 +3,30 @@ import { Container } from '../../ui/Container/Container'
 import styles from './index.module.scss'
 import cn from 'classnames'
 import { Section } from 'src/shared/ui/Section/section'
-import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { Swiper, SwiperSlide, type SwiperRef } from 'swiper/react'
-import { type RefObject, useMemo, useRef } from 'react'
+import { type RefObject, useMemo, useRef, useEffect, useState } from 'react'
 import { SliderBtns } from 'src/widgets/slider-btns/slider-btns'
 import { newsSliderOptions } from './consts'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { NewsCard } from './components/NewsCard/news-card'
 import { type CardNewsItem } from 'src/types/news'
+import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 
 export const NewsSection = () => {
 	const { data: newsList } = useGetEventNewsByIdQuery('1')
+	const [isMobile, setIsMobile] = useState(false)
 	const breakpoint = useBreakPoint()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth <= 1024)
+		}
+		handleResize()
+		window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
 
 	const { mainNews, topNews } = useMemo(() => {
 		if (!newsList) {
@@ -67,48 +77,71 @@ export const NewsSection = () => {
 
 		return newsList.filter((news) => !excludedNewsIds.includes(news.id))
 	}, [newsList, mainNews, topNews])
+
 	return (
-		<Section className={cn(styles.news)}>
+		<Section id='news' className={cn(styles.news)}>
 			<Container>
-				<FlexRow className={styles.newsSectionRow}>
-					<h2>Новости</h2>
-					<MainButton as='route' to={''}>
-						Все новости
-					</MainButton>
-				</FlexRow>
-				{(breakpoint === 'L' || breakpoint === 'sliderBtnsPoint') && (
-					<div className={styles.breakpointNews}>
-						{mainNews ? (
-							<>
-								<div className={styles.mainNews}>
-									<NewsCard {...mainNews} mainStatus={true} className={styles.mainNewsCard} />
-								</div>
-								<div className={styles.topNews}>
-									{topNews.map((news) => (
-										<NewsCard className={styles.defaultNewsCard} key={news.id} {...news} />
-									))}
-								</div>
-							</>
-						) : (
-							<div className={styles.topNews}>
-								{topNews.map((news) => (
-									<NewsCard className={styles.defaultNewsCard} key={news.id} {...news} />
-								))}
+				{!isMobile ? (
+					<>
+						<FlexRow className={styles.newsSectionRow}>
+							<h2>Новости</h2>
+							<MainButton as='route' to={`https://этноспорт.рф/news`}>
+								Все новости
+							</MainButton>
+						</FlexRow>
+						{(breakpoint === 'L' || breakpoint === 'sliderBtnsPoint') && (
+							<div className={styles.breakpointNews}>
+								{mainNews ? (
+									<>
+										<div className={styles.mainNews}>
+											<NewsCard {...mainNews} mainStatus={true} className={styles.mainNewsCard} />
+										</div>
+										<div className={styles.topNews}>
+											{topNews.map((news) => (
+												<NewsCard className={styles.defaultNewsCard} key={news.id} {...news} />
+											))}
+										</div>
+									</>
+								) : (
+									<div className={styles.topNews}>
+										{topNews.map((news) => (
+											<NewsCard className={styles.defaultNewsCard} key={news.id} {...news} />
+										))}
+									</div>
+								)}
 							</div>
 						)}
-					</div>
-				)}
-				{sliderNews?.length > 0 && (
-					<div className='slider-with-btns'>
-						<Swiper {...newsSliderOptions} ref={swiperRef}>
-							{sliderNews.map((newsEl, idx) => (
-								<SwiperSlide className={styles.newsSlide} key={idx}>
-									<NewsCard key={newsEl.id} {...newsEl} />
-								</SwiperSlide>
-							))}
-						</Swiper>
-						<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} />
-					</div>
+						{sliderNews?.length > 0 && (
+							<div className='slider-with-btns'>
+								<Swiper {...newsSliderOptions} ref={swiperRef}>
+									{sliderNews.map((newsEl, idx) => (
+										<SwiperSlide className={styles.newsSlide} key={idx}>
+											<NewsCard key={newsEl.id} {...newsEl} />
+										</SwiperSlide>
+									))}
+								</Swiper>
+								<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} />
+							</div>
+						)}
+					</>
+				) : (
+					<>
+						<FlexRow className={styles.newsSectionRow}>
+							<h2>Новости</h2>
+						</FlexRow>
+						{newsList && newsList?.length > 0 && (
+							<div className='slider-with-btns'>
+								<Swiper {...newsSliderOptions} ref={swiperRef} className={styles.swiperNews}>
+									{newsList.map((newsEl, idx) => (
+										<SwiperSlide className={styles.newsSlide} key={idx}>
+											<NewsCard key={newsEl.id} {...newsEl} />
+										</SwiperSlide>
+									))}
+								</Swiper>
+								<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} />
+							</div>
+						)}
+					</>
 				)}
 			</Container>
 		</Section>

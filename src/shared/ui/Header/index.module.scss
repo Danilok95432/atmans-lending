@@ -1,11 +1,28 @@
 .header {
   padding: 40px 0;
+  @media (max-width: 1340px) {
+    padding: 20px 0 15px 0;
+  }
   .headerRow {
+    @media (max-width: 1340px) {
+      align-items: center;
+      justify-content: space-around;
+    }
+    @media (max-width: 768px) {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
     .infoBlock {
       display: flex;
       flex-direction: column;
       gap: 5px;
       margin: 0 auto 0 20px;
+      @media (max-width: 1340px) {
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
       .dates {
         color: #CC1746;
         font-size: 20px;
@@ -27,6 +44,9 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
+      @media (max-width: 1340px) {
+        display: none;
+      }
       .enterLK {
         display: flex;
         flex-direction: row;

@@ -20,7 +20,7 @@ export const VideoCard: FC<VideoCardProps> = ({
 	date,
 }) => {
 	return (
-		<Link className={cn(styles.videoCard, className)} to={`/${''}/${id}`}>
+		<Link className={cn(styles.videoCard, className)} to={`https://этноспорт.рф/videos/${id}`}>
 			<div className={styles.videoThumbWrapper}>
 				<img src={mainphoto[0]?.original} alt={title} />
 				{date && (

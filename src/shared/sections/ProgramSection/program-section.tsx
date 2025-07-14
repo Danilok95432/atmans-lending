@@ -10,11 +10,14 @@ import { DefisSVG } from 'src/shared/ui/icons/defisSVG'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { type RefObject, useRef } from 'react'
 import { programSliderOptions } from './consts'
+import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
+import { Link } from 'react-router-dom'
 
 export const ProgramSection = () => {
 	const { data: programDays } = useGetEventProgramByIdQuery('1')
 	const [activeDayId, setActiveDayId] = useState(1)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
+	const breakPoint = useBreakPoint()
 
 	const navDays = programDays?.map((day) => ({ id: day.id, date: day.date }))
 
@@ -31,7 +34,7 @@ export const ProgramSection = () => {
 	}
 
 	return (
-		<Section className={cn(styles.program)}>
+		<Section id='program' className={cn(styles.program)}>
 			<Container>
 				<FlexRow className={styles.programWrapper}>
 					<FlexRow className={styles.programHeadRow}>
@@ -72,8 +75,10 @@ export const ProgramSection = () => {
 										{getActiveProgram().map((programEl) => (
 											<FlexRow key={programEl.id} className={styles.elRow}>
 												<p>{programEl.time}</p>
-												<DefisSVG />
-												<p>{programEl.title}</p>
+												{breakPoint === 'S' ? null : <DefisSVG />}
+												<Link to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}>
+													<p>{programEl.title}</p>
+												</Link>
 											</FlexRow>
 										))}
 									</FlexRow>

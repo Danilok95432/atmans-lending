@@ -13,7 +13,7 @@ export const PartnersSection = () => {
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 	if (!eventData?.partnerLinks) return ''
 	return (
-		<Section className={cn(styles.partners)}>
+		<Section id='partners' className={cn(styles.partners)}>
 			<Container>
 				<h2>Партнеры</h2>
 				<div className={styles.partnerSlider}>

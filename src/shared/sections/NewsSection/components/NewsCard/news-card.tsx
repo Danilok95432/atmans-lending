@@ -22,7 +22,12 @@ export const NewsCard: FC<NewsCardProps> = ({
 }) => {
 	if (mainStatus) {
 		return (
-			<Link className={cn(styles.newsItem, className)} to={``} aria-label={title} title={title}>
+			<Link
+				className={cn(styles.newsItem, className)}
+				to={`https://этноспорт.рф/news/${id}`}
+				aria-label={title}
+				title={title}
+			>
 				<figure className={styles.mainNewsContainer}>
 					<div className={styles.newsImgWrapper}>
 						<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />
@@ -37,7 +42,12 @@ export const NewsCard: FC<NewsCardProps> = ({
 		)
 	}
 	return (
-		<Link className={styles.newsItem} to={``} aria-label={title} title={title}>
+		<Link
+			className={styles.newsItem}
+			to={`https://этноспорт.рф/news/${id}`}
+			aria-label={title}
+			title={title}
+		>
 			<figure>
 				<div className={styles.newsImgWrapper}>
 					<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />

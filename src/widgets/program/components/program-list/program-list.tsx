@@ -21,7 +21,7 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 						<li key={programEL.id}>
 							<p className={styles.programTime}>{programEL.time}</p>
 							<span className={styles.programPlace}>{programEL.place}</span>
-							<Link to={`${''}/${programEL.id}`}>
+							<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
 								<span className={styles.programTitle}>{programEL.title}</span>
 							</Link>
 							{programEL.use_reg === 1 && (
@@ -40,7 +40,7 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 								<img src={skeleton} alt='' />
 							</div>
 							<figcaption>
-								<Link to={`${''}/${programEL.id}`}>
+								<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
 									<h3 className={styles.programTitle}>{programEL.title}</h3>
 								</Link>
 								<p className={styles.programTime}>{programEL.time}</p>
