@@ -22,7 +22,6 @@ export const AuthModal = () => {
 	})
 
 	const onSubmit: SubmitHandler<AuthInputs> = async (data) => {
-		console.log(data)
 		closeModal()
 	}
 

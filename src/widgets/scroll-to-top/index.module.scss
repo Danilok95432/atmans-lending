@@ -1,33 +1,51 @@
 .scrollToTop {
-  position: fixed;
-  bottom: 80px;
-  right: 60px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #CC1746;
-  color: white;
-  border: none;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  @media (max-width: 768px) {
-    right: 4vw;
-    bottom: 10vh;
-  }
+	position: fixed;
+	bottom: 80px;
+	right: 60px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: #cc1746;
+	color: white;
+	border: none;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	@media (max-width: 768px) {
+		right: 4vw;
+		bottom: 10vh;
+	}
 
-  svg {
-    transform: rotate(-90deg);
-    fill: white;
-  }
+	svg {
+		transform: rotate(-90deg);
+		fill: white;
+	}
 
 	&:hover {
-    scale: 1.2;
+		scale: 1.2;
+	}
+
+	.arrow {
+		transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+
+	.arrow.bounce {
+		animation: bounce 0.4s;
+	}
+
+	@keyframes bounce {
+		0%,
+		100% {
+			transform: rotate(-90deg) translateY(0);
+		}
+		50% {
+			transform: rotate(-90deg) translateX(8px);
+		}
 	}
 
 	&.visible {

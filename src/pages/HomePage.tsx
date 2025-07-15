@@ -23,8 +23,8 @@ export const HomePage = () => {
 			<MainNavigation />
 			<AwardsSection />
 			<MainSliderSection />
-			<NewsSection />
 			<OrgsSection />
+			<NewsSection />
 			<GeneralPartnersSection />
 			<ProgramSection />
 			<PartnersSection />

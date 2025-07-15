@@ -4,8 +4,7 @@ import { SlideNextSvg } from 'src/shared/ui/icons/slideNextSVG'
 
 export const ScrollToTop = () => {
 	const [isVisible, setIsVisible] = useState(false)
-
-	// Высота хедера (можете передать как пропс или использовать константу)
+	const [isClicked, setIsClicked] = useState(false)
 	const headerHeight = 80
 
 	useEffect(() => {
@@ -23,10 +22,12 @@ export const ScrollToTop = () => {
 	}, [headerHeight])
 
 	const scrollToTop = () => {
+		setIsClicked(true)
 		window.scrollTo({
 			top: 0,
 			behavior: 'smooth',
 		})
+		setTimeout(() => setIsClicked(false), 300)
 	}
 
 	return (
@@ -35,7 +36,7 @@ export const ScrollToTop = () => {
 			onClick={scrollToTop}
 			aria-label='Наверх'
 		>
-			<SlideNextSvg color='white' />
+			<SlideNextSvg color='white' className={`${styles.arrow} ${isClicked ? styles.bounce : ''}`} />
 		</button>
 	)
 }

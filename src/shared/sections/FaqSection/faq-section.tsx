@@ -8,7 +8,6 @@ import { AccordionItem } from 'src/widgets/accordion-item/accordion-item'
 
 export const FaqSection = () => {
 	const { data: faq } = useGetFaqByIdQuery('1')
-	console.log(faq)
 	return (
 		<Section className={cn(styles.faq)}>
 			<Container>
