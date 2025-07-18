@@ -48,11 +48,12 @@ export type EventItem = {
 	partnerImg: string
 	pathways: PathwayItem[]
 	placement: PathwayItem[]
-	faq: Array<{ title: string; content: string }>
+	faq: Array<{ id: string; title: string; content: string }>
 	program: ProgramDay[]
 	descs: string[]
 	sideDocs: ShortDocument[]
 	organizerLinks: SimpleLinkType[]
+	organizerGameLinks: SimpleLinkType[]
 	partnerLinks: SimpleLinkType[]
 	partnerGeneralLinks: SimpleLinkType[]
 	news: CardNewsItem[]

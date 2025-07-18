@@ -7,20 +7,18 @@ import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { type RefObject, useRef } from 'react'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { partnersSliderOptions } from './consts'
-import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 
 export const OrgsSection = () => {
 	const { data: eventData } = useGetEventByIdQuery('1')
-	const breakPoint = useBreakPoint()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	if (!eventData?.organizerLinks) return ''
+	if (!eventData?.organizerGameLinks) return ''
 	return (
 		<Section id='orgs' className={cn(styles.orgs)}>
 			<Container>
-				<h2>{breakPoint === 'S' ? 'Организаторы' : 'Организаторы игр'}</h2>
+				<h2>{'Организаторы игр'}</h2>
 				<div className={styles.partnerSlider}>
 					<Swiper {...partnersSliderOptions} ref={swiperRef}>
-						{eventData?.organizerLinks.map((slideItem, idx) => (
+						{eventData?.organizerGameLinks.map((slideItem, idx) => (
 							<SwiperSlide key={idx} className={styles.partnerSlide}>
 								<div className={styles.partnerCard} key={slideItem.id}>
 									<a href={slideItem.link} className={styles.partnersLink}>

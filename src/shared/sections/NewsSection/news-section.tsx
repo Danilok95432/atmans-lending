@@ -112,8 +112,8 @@ export const NewsSection = () => {
 							</div>
 						)}
 						{sliderNews?.length > 0 && (
-							<div className='slider-with-btns'>
-								<Swiper {...newsSliderOptions} ref={swiperRef}>
+							<>
+								<Swiper {...newsSliderOptions} ref={swiperRef} className={styles.newsSlider}>
 									{sliderNews.map((newsEl, idx) => (
 										<SwiperSlide className={styles.newsSlide} key={idx}>
 											<NewsCard key={newsEl.id} {...newsEl} />
@@ -121,7 +121,7 @@ export const NewsSection = () => {
 									))}
 								</Swiper>
 								<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} />
-							</div>
+							</>
 						)}
 					</>
 				) : (

@@ -30,10 +30,16 @@
 	}
 }
 
+.news {
+	.newsSlider {
+		position: relative;
+	}
+}
+
 .newsSliderBtns {
-	top: 49%;
-	@media (max-width: 768px) {
-		top: 49%;
+	top: 75%;
+	@media (max-width: 1024px) {
+		top: 45%;
 	}
 	@media (max-width: 440px) {
 		top: 35%;
