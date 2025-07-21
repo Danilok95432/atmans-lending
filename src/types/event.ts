@@ -35,6 +35,34 @@ export type EventFaq = {
 	content: string
 }
 
+export type OrganizerLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphotoOL?: ImageItemWithText[]
+}
+
+export type OrganizerGameLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphotoOG?: ImageItemWithText[]
+}
+
+export type PartnerLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphotoPLL?: ImageItemWithText[]
+}
+
+export type PartnerGeneralLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphotoGL?: ImageItemWithText[]
+}
+
 export type EventItem = {
 	ageRating: string
 	status: 'cancel' | 'current' | 'future' | 'finished'
@@ -52,10 +80,10 @@ export type EventItem = {
 	program: ProgramDay[]
 	descs: string[]
 	sideDocs: ShortDocument[]
-	organizerLinks: SimpleLinkType[]
-	organizerGameLinks: SimpleLinkType[]
-	partnerLinks: SimpleLinkType[]
-	partnerGeneralLinks: SimpleLinkType[]
+	organizerLinks: OrganizerLinksType[]
+	organizerGameLinks: OrganizerGameLinksType[]
+	partnerLinks: PartnerLinksType[]
+	partnerGeneralLinks: PartnerGeneralLinksType[]
 	news: CardNewsItem[]
 	videos: VideoItem[]
 	photos: ImageItem[]

@@ -1,0 +1,15 @@
+.b24-widget-button-wrapper {
+  bottom: 3%;
+  right: 0;
+}
+
+.bx-livechat-wrapper {
+  right: 0;
+}
+
+.b24-widget-button-position-bottom-right .b24-widget-button-popup {
+  @media (max-width: 440px) {
+    left: -260px;
+    bottom: 60px;
+  }
+}

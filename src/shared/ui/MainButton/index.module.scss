@@ -58,3 +58,12 @@
 		}};
     */
 }
+
+.disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  &:hover {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+}

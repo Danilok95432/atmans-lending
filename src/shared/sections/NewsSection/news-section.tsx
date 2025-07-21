@@ -130,7 +130,7 @@ export const NewsSection = () => {
 							<h2>Новости</h2>
 						</FlexRow>
 						{newsList && newsList?.length > 0 && (
-							<div className='slider-with-btns'>
+							<>
 								<Swiper {...newsSliderOptions} ref={swiperRef} className={styles.swiperNews}>
 									{newsList.map((newsEl, idx) => (
 										<SwiperSlide className={styles.newsSlide} key={idx}>
@@ -139,7 +139,7 @@ export const NewsSection = () => {
 									))}
 								</Swiper>
 								<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} />
-							</div>
+							</>
 						)}
 					</>
 				)}

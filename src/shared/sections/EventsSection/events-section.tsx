@@ -61,7 +61,7 @@ export const EventsSection = () => {
 						</FlexRow>
 					</FlexRow>
 					<div className={styles.imgWrapper}>
-						<img src='#' alt='#' />
+						<img src='src/assets/img/traditionJPG.jpg' alt='#' />
 					</div>
 				</FlexRow>
 			</Container>

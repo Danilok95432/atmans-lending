@@ -11,17 +11,33 @@ import { LogoMobileSVG } from '../icons/logoMobileSVG'
 import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
 import { useActions } from 'src/app/store/hooks/actions'
 import { RegEventGuestModal } from 'src/modals/reg-guest-modal/reg-guest-modal'
-import { AuthModal } from 'src/modals/auth-modal/auth-modal'
+import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export const Header = () => {
 	const { openModal } = useActions()
 	const breakpoint = useBreakPoint()
 	const daysDiff = getDaysUntil()
+	const [isSmallScreen, setIsSmallScreen] = useState(false)
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsSmallScreen(window.innerWidth <= 1340)
+		}
+		handleResize()
+		window.addEventListener('resize', handleResize)
+		return () => {
+			window.removeEventListener('resize', handleResize)
+		}
+	}, [])
+
 	return (
 		<header className={styles.header}>
 			<Container>
 				<FlexRow className={styles.headerRow}>
-					{breakpoint === 'S' ? <LogoMobileSVG /> : <LogoSVG />}
+					<Link to={'https://атманки.рф'} aria-label='Главная' title='Главная'>
+						{breakpoint === 'S' ? <LogoMobileSVG /> : <LogoSVG />}
+					</Link>
 					<div className={styles.infoBlock}>
 						<p className={styles.dates}>22-24 августа 2025 года</p>
 						<p>
@@ -32,32 +48,73 @@ export const Header = () => {
 							<br /> 15 июля 2025 года
 						</p>
 					</div>
-					<FlexRow className={styles.controlsRow}>
-						<FlexRow>
-							<MainButton onClick={() => openModal(<RegEventGuestModal id={'1'} />)}>
-								Регистрация гостей
-							</MainButton>
-							<MainButton onClick={() => openModal(<RegEventPartModal id={'1'} />)}>
-								Регистрация участников
-							</MainButton>
+					{isSmallScreen ? (
+						<FlexRow className={styles.controlsSmallRow}>
+							<FlexRow className={styles.modalsRow}>
+								<MainButton
+									className={styles.headerBtn}
+									onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
+								>
+									Регистрация гостей
+								</MainButton>
+								<MainButton
+									className={styles.headerBtn}
+									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
+								>
+									Регистрация участников
+								</MainButton>
+								<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
+									<div className={styles.vector}>
+										<PersonIconSvg />
+									</div>
+									<p>Войти в кабинет</p>
+								</Link>
+							</FlexRow>
+							<FlexRow className={styles.linksRow}>
+								<a href='#' className={styles.linkEl}>
+									<FileLinkSVG />
+									<span>Политика защиты и обработки персональных данных</span>
+								</a>
+								<a href='#' className={styles.linkEl}>
+									<FileLinkSVG />
+									<span>Правила посещения игр</span>
+								</a>
+							</FlexRow>
 						</FlexRow>
-						<button className={styles.enterLK} onClick={() => openModal(<AuthModal />)}>
-							<div className={styles.vector}>
-								<PersonIconSvg />
-							</div>
-							<p>Войти в кабинет</p>
-						</button>
-						<FlexRow className={styles.linksRow}>
-							<a href='#' className={styles.linkEl}>
-								<FileLinkSVG />
-								<span>Политика защиты и обработки персональных данных</span>
-							</a>
-							<a href='#' className={styles.linkEl}>
-								<FileLinkSVG />
-								<span>Правила посещения игр</span>
-							</a>
+					) : (
+						<FlexRow className={styles.controlsRow}>
+							<FlexRow>
+								<MainButton
+									className={styles.headerBtn}
+									onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
+								>
+									Регистрация гостей
+								</MainButton>
+								<MainButton
+									className={styles.headerBtn}
+									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
+								>
+									Регистрация участников
+								</MainButton>
+							</FlexRow>
+							<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
+								<div className={styles.vector}>
+									<PersonIconSvg />
+								</div>
+								<p>Войти в кабинет</p>
+							</Link>
+							<FlexRow className={styles.linksRow}>
+								<a href='#' className={styles.linkEl}>
+									<FileLinkSVG />
+									<span>Политика защиты и обработки персональных данных</span>
+								</a>
+								<a href='#' className={styles.linkEl}>
+									<FileLinkSVG />
+									<span>Правила посещения игр</span>
+								</a>
+							</FlexRow>
 						</FlexRow>
-					</FlexRow>
+					)}
 				</FlexRow>
 			</Container>
 		</header>

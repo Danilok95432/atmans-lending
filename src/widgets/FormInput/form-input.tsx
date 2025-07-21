@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import React, { useState, useRef, type InputHTMLAttributes, useEffect } from 'react'
 import InputMask from 'react-input-mask'
 import cn from 'classnames'
@@ -320,12 +321,22 @@ export const FormInput: React.FC<TextInputProps> = ({
 								</InputMask>
 								{isPhoneWithCode && (
 									<MainButton
-										className={cn(styles.sendCodeBtn, { [styles.resend]: countdown > 0 })}
-										// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+										className={cn(styles.sendCodeBtn, {
+											[styles.resend]: countdown > 0 && !isCodeAccepted,
+											[styles.codeAccepted]: isCodeAccepted,
+										})}
 										onClick={async () => await handleSendCode(fieldValue)}
-										disabled={!fieldValue || fieldValue.includes('_') || isSended || countdown > 0}
+										disabled={
+											(!fieldValue || fieldValue.includes('_') || isSended) &&
+											countdown > 0 &&
+											!isCodeAccepted
+										}
 									>
-										{countdown > 0 ? `Повторная отправка: ${countdown}` : 'Отправить код'}
+										{isCodeAccepted
+											? 'Код верный'
+											: countdown > 0
+												? `Повторная отправка: ${countdown}`
+												: 'Отправить код'}
 									</MainButton>
 								)}
 							</>

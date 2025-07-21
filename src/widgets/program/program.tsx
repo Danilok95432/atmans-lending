@@ -26,7 +26,7 @@ export const Program: FC<EventProgramProps> = ({ programDays, parentView = 'list
 	if (!programDays?.length) return <h4>нет программы</h4>
 
 	return (
-		<div>
+		<div className={styles.head}>
 			<FlexRow className={styles.headProgram}>
 				<ProgramNav
 					days={navDays}

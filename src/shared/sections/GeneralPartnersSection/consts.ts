@@ -6,7 +6,19 @@ export const partnersSliderOptions: SwiperProps = {
 	slidesPerGroup: 1,
 	spaceBetween: 17,
 	autoHeight: false,
+	loop: true,
+	autoplay: {
+		delay: 2000,
+		disableOnInteraction: false,
+		pauseOnMouseEnter: true,
+	},
 	breakpoints: {
+		[DisplayBreakpoints.Xss]: {
+			slidesPerView: 1,
+		},
+		[DisplayBreakpoints.Xs]: {
+			slidesPerView: 2,
+		},
 		[DisplayBreakpoints.Sm]: {
 			slidesPerView: 2,
 		},
@@ -17,13 +29,13 @@ export const partnersSliderOptions: SwiperProps = {
 			slidesPerView: 4,
 		},
 		[DisplayBreakpoints.Lg]: {
-			slidesPerView: 7,
+			slidesPerView: 5,
 		},
 		[DisplayBreakpoints.Xll]: {
-			slidesPerView: 8,
+			slidesPerView: 6,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 9,
+			slidesPerView: 6,
 		},
 	},
 }

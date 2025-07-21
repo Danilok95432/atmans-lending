@@ -7,6 +7,7 @@ import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { partnersSliderOptions } from './consts'
 import { type RefObject, useRef } from 'react'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { Autoplay } from 'swiper'
 
 export const PartnersSection = () => {
 	const { data: eventData } = useGetEventByIdQuery('1')
@@ -17,19 +18,31 @@ export const PartnersSection = () => {
 			<Container>
 				<h2>Партнеры</h2>
 				<div className={styles.partnerSlider}>
-					<Swiper {...partnersSliderOptions} ref={swiperRef}>
+					<Swiper modules={[Autoplay]} {...partnersSliderOptions} ref={swiperRef}>
 						{eventData?.partnerLinks.map((slideItem, idx) => (
 							<SwiperSlide key={idx} className={styles.partnerSlide}>
 								<div className={styles.partnerCard} key={slideItem.id}>
-									<a href={slideItem.link} className={styles.partnersLink}>
-										<img
-											src={slideItem.mainphoto[0]?.thumbnail}
-											alt='partner'
-											width={188}
-											height={105}
-											loading='lazy'
-										/>
-									</a>
+									{slideItem.link && slideItem.link !== '' ? (
+										<a href={slideItem.link} className={styles.partnersLink}>
+											<img
+												src={slideItem.mainphotoPLL?.[0]?.thumbnail}
+												alt='partner'
+												width={188}
+												height={105}
+												loading='lazy'
+											/>
+										</a>
+									) : (
+										<div className={styles.partnersLink}>
+											<img
+												src={slideItem.mainphotoPLL?.[0]?.thumbnail}
+												alt='partner'
+												width={188}
+												height={105}
+												loading='lazy'
+											/>
+										</div>
+									)}
 								</div>
 							</SwiperSlide>
 						))}

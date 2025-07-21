@@ -9,8 +9,12 @@
 		}
 	}
 	.partnerSlider {
+		img {
+			width: 100%;
+			object-fit: contain;
+		}
 		@media (max-width: 768px) {
-			margin: 0 50px;
+			margin: 0 40px;
 		}
 	}
 }

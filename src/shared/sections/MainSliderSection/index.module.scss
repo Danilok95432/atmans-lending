@@ -24,6 +24,7 @@
   .slideRow {
     justify-content: space-between;
     flex-wrap: nowrap;
+    align-items: unset;
     @media (max-width: 768px) {
       flex-direction: column;
     }
@@ -81,7 +82,7 @@
       }
       .eventsSliderBtns {
         top: unset;
-        bottom: -40px;
+        bottom: 0px;
         width: 88px;
         left: 48px;
         @media (max-width: 768px) {

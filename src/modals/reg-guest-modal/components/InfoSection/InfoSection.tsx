@@ -36,15 +36,6 @@ export const InfoSection: FC<InfoSectionProps> = ({
 	return (
 		<div className={styles.formSection}>
 			<span className={styles.title}>Основные данные</span>
-			<FlexRow className={styles.groupInputs}>
-				<FormInput name='surname' label='Фамилия' />
-				<FormInput name='firstname' label='Имя' />
-			</FlexRow>
-			<FlexRow className={styles.groupInputs}>
-				<FormInput name='fathname' label='Отчество' className={styles.inputWrapperContainer} />
-				<FormInput name='age' label='Возраст' className={styles.shortInput} />
-			</FlexRow>
-			<FormInput name='email' label='Электронная почта' />
 			<FlexRow className={styles.groupInputsStart}>
 				<div className={styles.inputwithLabel} ref={phoneInputRef}>
 					<FormInput
@@ -52,6 +43,7 @@ export const InfoSection: FC<InfoSectionProps> = ({
 						label='Номер телефона'
 						isPhoneWithCode={true}
 						className={styles.noMargin}
+						isCodeAccepted={isCodeAccepted}
 					/>
 					{errorForm && <p className={styles.warningMessage}>{errorForm}</p>}
 					<span className={styles.phoneSpan}>На этот номер поступит СМС со ссылкой на билет</span>
@@ -71,6 +63,15 @@ export const InfoSection: FC<InfoSectionProps> = ({
 					<span>Введите поступивший код для проверки номера телефона</span>
 				</div>
 			</FlexRow>
+			<FlexRow className={styles.groupInputs}>
+				<FormInput name='surname' label='Фамилия' />
+				<FormInput name='firstname' label='Имя' />
+			</FlexRow>
+			<FlexRow className={styles.groupInputs}>
+				<FormInput name='fathname' label='Отчество' className={styles.inputWrapperContainer} />
+				<FormInput name='age' label='Возраст' className={styles.shortInput} />
+			</FlexRow>
+			<FormInput name='email' label='Электронная почта' />
 		</div>
 	)
 }
