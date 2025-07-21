@@ -4,11 +4,11 @@ import { FlexRow } from '../FlexRow/FlexRow'
 import styles from './index.module.scss'
 import { LogoSVG } from '../icons/logoSVG'
 import { MainButton } from '../MainButton/MainButton'
-import { PersonIconSvg } from '../icons/personIconSVG'
+// import { PersonIconSvg } from '../icons/personIconSVG'
 import { FileLinkSVG } from '../icons/fileLinkSVG'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { LogoMobileSVG } from '../icons/logoMobileSVG'
-import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
+// import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
 import { useActions } from 'src/app/store/hooks/actions'
 import { RegEventGuestModal } from 'src/modals/reg-guest-modal/reg-guest-modal'
 import { Link } from 'react-router-dom'
@@ -44,8 +44,7 @@ export const Header = () => {
 							До игр осталось: <span>{daysDiff}</span> {getDayWord(daysDiff)}
 						</p>
 						<p className={styles.starts}>
-							Начало регистрации:
-							<br /> 15 июля 2025 года
+							Регистрация гостей открыта, начало регистрации участников с 1 августа
 						</p>
 					</div>
 					{isSmallScreen ? (
@@ -57,18 +56,22 @@ export const Header = () => {
 								>
 									Регистрация гостей
 								</MainButton>
-								<MainButton
+								{/*
+									<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
 								>
 									Регистрация участников
 								</MainButton>
+									*/}
+								{/*
 								<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
 									<div className={styles.vector}>
 										<PersonIconSvg />
 									</div>
 									<p>Войти в кабинет</p>
 								</Link>
+								*/}
 							</FlexRow>
 							<FlexRow className={styles.linksRow}>
 								<a href='#' className={styles.linkEl}>
@@ -90,19 +93,23 @@ export const Header = () => {
 								>
 									Регистрация гостей
 								</MainButton>
-								<MainButton
+								{/*
+									<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
 								>
 									Регистрация участников
 								</MainButton>
+									*/}
 							</FlexRow>
+							{/*
 							<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
 								<div className={styles.vector}>
 									<PersonIconSvg />
 								</div>
 								<p>Войти в кабинет</p>
 							</Link>
+							*/}
 							<FlexRow className={styles.linksRow}>
 								<a href='#' className={styles.linkEl}>
 									<FileLinkSVG />

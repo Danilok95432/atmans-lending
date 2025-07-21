@@ -9,7 +9,7 @@ import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { DownloadMobileSVG } from 'src/shared/ui/icons/downloadMobileSVG'
 import { RegEventGuestModal } from 'src/modals/reg-guest-modal/reg-guest-modal'
 import { useActions } from 'src/app/store/hooks/actions'
-import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
+// import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
 
 export const EventsSection = () => {
 	const breakpoint = useBreakPoint()
@@ -55,9 +55,14 @@ export const EventsSection = () => {
 							<MainButton onClick={() => openModal(<RegEventGuestModal id={'1'} />)}>
 								Регистрация гостей
 							</MainButton>
-							<MainButton onClick={() => openModal(<RegEventPartModal id={'1'} />)}>
-								Регистрация участников
-							</MainButton>
+							{/*
+									<MainButton
+									className={styles.headerBtn}
+									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
+								>
+									Регистрация участников
+								</MainButton>
+									*/}
 						</FlexRow>
 					</FlexRow>
 					<div className={styles.imgWrapper}>
