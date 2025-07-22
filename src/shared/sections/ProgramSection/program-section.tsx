@@ -23,14 +23,20 @@ export const ProgramSection = () => {
 
 	const goToDay = (dayId: number) => {
 		setActiveDayId(dayId)
-
 		const index = programDays?.findIndex((day) => day.id === dayId) ?? 0
-
 		swiperRef.current?.swiper.slideTo(index, 500)
 	}
 
-	const getActiveProgram = () => {
-		return programDays?.find((day) => day.id === activeDayId)?.programList ?? []
+	const getGroupedProgram = () => {
+		const list = programDays?.find((day) => day.id === activeDayId)?.programList ?? []
+		return list.reduce<Record<string, typeof list>>((acc, programEl) => {
+			const place = programEl.place || 'Место не указано'
+			if (!acc[place]) {
+				acc[place] = []
+			}
+			acc[place].push(programEl)
+			return acc
+		}, {})
 	}
 
 	return (
@@ -72,14 +78,21 @@ export const ProgramSection = () => {
 													? 'Последний день игр'
 													: 'Первый день игр'}
 										</h2>
-										{getActiveProgram().map((programEl) => (
-											<FlexRow key={programEl.id} className={styles.elRow}>
-												<p>{programEl.time}</p>
-												{breakPoint === 'S' ? null : <DefisSVG />}
-												<Link to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}>
-													<p>{programEl.title}</p>
-												</Link>
-											</FlexRow>
+										{Object.entries(getGroupedProgram()).map(([place, items]) => (
+											<div key={place} className={styles.group}>
+												<p className={styles.placeTitle}>{place}</p>
+												{items.map((programEl) => (
+													<FlexRow key={programEl.id} className={styles.elRow}>
+														<p>{programEl.time}</p>
+														{breakPoint === 'S' ? null : <DefisSVG />}
+														<Link
+															to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
+														>
+															<p>{programEl.title}</p>
+														</Link>
+													</FlexRow>
+												))}
+											</div>
 										))}
 									</FlexRow>
 								</SwiperSlide>

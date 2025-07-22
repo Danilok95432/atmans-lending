@@ -68,7 +68,10 @@ div.swiperSliderSubEvents {
 }
 
 .subEventsSliderBtns {
-    top: 55%;
+	top: 55%;
+	@media (max-width: 440px) {
+		width: calc(100% + 20px);
+	}
 }
 
 .listTabs {
@@ -89,6 +92,12 @@ div.swiperSliderSubEvents {
 		transition: all 0.3s ease-in-out;
 		@media (max-width: 768px) {
 			width: 300px;
+			height: auto;
+			max-height: max-content;
+		}
+
+		@media (max-width: 440px) {
+			width: 245px;
 			height: auto;
 			max-height: max-content;
 		}
@@ -200,6 +209,11 @@ div.swiperSliderSubEvents {
 		height: auto;
 		max-height: max-content;
     margin: 0 auto;
+	}
+	@media (max-width: 440px) {
+		width: 245px;
+		height: auto;
+		max-height: max-content;
 	}
 
 	@include hover {

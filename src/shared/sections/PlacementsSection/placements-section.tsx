@@ -13,7 +13,7 @@ export const PlacementsSection = () => {
 				<div className={styles.mapTab}>
 					<h2>Размещение</h2>
 					<section>
-						<Placement placeVariants={eventInfo?.placement} />
+						<Placement placeVariants={eventInfo?.placements} />
 					</section>
 				</div>
 			</Container>

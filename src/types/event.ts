@@ -75,7 +75,7 @@ export type EventItem = {
 	brandImg: string
 	partnerImg: string
 	pathways: PathwayItem[]
-	placement: PathwayItem[]
+	placements: PathwayItem[]
 	faq: Array<{ id: string; title: string; content: string }>
 	program: ProgramDay[]
 	descs: string[]

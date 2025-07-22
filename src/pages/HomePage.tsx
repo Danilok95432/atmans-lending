@@ -15,6 +15,7 @@ import { VideosSection } from 'src/shared/sections/VideosSection/videos-section'
 import { SubEventsSection } from 'src/shared/sections/SubEventsSection/sub-events-section'
 import { ProgramSection } from 'src/shared/sections/ProgramSection/program-section'
 import { EventsSection } from 'src/shared/sections/EventsSection/events-section'
+import { FinancialPartnersSection } from 'src/shared/sections/FinancialPartners/financial-partners-section'
 
 export const HomePage = () => {
 	return (
@@ -24,10 +25,11 @@ export const HomePage = () => {
 			<AwardsSection />
 			<MainSliderSection />
 			<OrgsSection />
+			<PartnersSection />
 			<NewsSection />
 			<GeneralPartnersSection />
 			<ProgramSection />
-			<PartnersSection />
+			<FinancialPartnersSection />
 			<EventsSection />
 			<SubEventsSection />
 			<OrgsEventsSection />
