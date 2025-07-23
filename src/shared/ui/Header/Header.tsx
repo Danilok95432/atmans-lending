@@ -43,13 +43,13 @@ export const Header = () => {
 						<p>
 							До игр осталось: <span>{daysDiff}</span> {getDayWord(daysDiff)}
 						</p>
-						<p className={styles.starts}>
-							Регистрация гостей открыта. Начало регистрации участников с 1 августа
-						</p>
 					</div>
 					{isSmallScreen ? (
 						<FlexRow className={styles.controlsSmallRow}>
 							<FlexRow className={styles.modalsRow}>
+								<p className={styles.starts}>
+									Регистрация участников игр <br /> начнётся с 1 августа
+								</p>
 								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
@@ -87,6 +87,9 @@ export const Header = () => {
 					) : (
 						<FlexRow className={styles.controlsRow}>
 							<FlexRow>
+								<p className={styles.starts}>
+									Регистрация участников игр <br /> начнётся с 1 августа
+								</p>
 								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
