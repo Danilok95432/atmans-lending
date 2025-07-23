@@ -54,9 +54,6 @@
         justify-content: space-between;
         align-items: center;
         gap: 6px;
-        @media (max-width: 768px) {
-          display: none;
-        }
         span {
           color: #CC1746;
           font-size: 24px;

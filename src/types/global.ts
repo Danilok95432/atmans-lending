@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { ImageItemWithText } from './photos'
+import { type ImageItemWithText } from './photos'
 
 export type LinkItem = {
 	id: string

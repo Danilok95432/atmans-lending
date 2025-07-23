@@ -12,20 +12,20 @@ import { Autoplay } from 'swiper'
 export const FinancialPartnersSection = () => {
 	const { data: eventData } = useGetEventByIdQuery('1')
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	if (!eventData?.partnerGeneralLinks) return ''
+	if (!eventData?.sponsors) return ''
 	return (
 		<Section className={cn(styles.generalPartners)}>
 			<Container>
 				<h2>Финансовые партнеры</h2>
 				<div className={styles.partnerSlider}>
 					<Swiper modules={[Autoplay]} {...partnersSliderOptions} ref={swiperRef}>
-						{eventData?.partnerGeneralLinks.map((slideItem, idx) => (
+						{eventData?.sponsors.map((slideItem, idx) => (
 							<SwiperSlide key={idx} className={styles.partnerSlide}>
 								<div className={styles.partnerCard} key={slideItem.id}>
 									{slideItem.link && slideItem.link !== '' ? (
 										<a href={slideItem.link} className={styles.partnersLink}>
 											<img
-												src={slideItem.mainphotoGL?.[0]?.thumbnail}
+												src={slideItem.mainphoto?.[0]?.thumbnail}
 												alt='partner'
 												width={188}
 												height={105}
@@ -35,7 +35,7 @@ export const FinancialPartnersSection = () => {
 									) : (
 										<div className={styles.partnersLink}>
 											<img
-												src={slideItem.mainphotoGL?.[0]?.thumbnail}
+												src={slideItem.mainphoto?.[0]?.thumbnail}
 												alt='partner'
 												width={188}
 												height={105}

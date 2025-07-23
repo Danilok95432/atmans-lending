@@ -63,6 +63,34 @@ export type PartnerGeneralLinksType = {
 	mainphotoGL?: ImageItemWithText[]
 }
 
+export type SponsorsLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphoto?: ImageItemWithText[]
+}
+
+export type PromoItem = {
+	id: string
+	title: string
+	desc: string
+	original: string
+	thumbnail: string
+	author: string
+}
+
+export type InfoBlockContent = {
+	title: string
+	short: string
+	photo: ImageItemWithText[]
+	reg_participants: boolean
+	reg_guests: boolean
+	link_url: string
+	link_text: string
+	hidden: boolean
+	id: string
+}
+
 export type EventItem = {
 	ageRating: string
 	status: 'cancel' | 'current' | 'future' | 'finished'
@@ -84,9 +112,12 @@ export type EventItem = {
 	organizerGameLinks: OrganizerGameLinksType[]
 	partnerLinks: PartnerLinksType[]
 	partnerGeneralLinks: PartnerGeneralLinksType[]
+	sponsors: SponsorsLinksType[]
+	infoblock: InfoBlockContent
 	news: CardNewsItem[]
 	videos: VideoItem[]
 	photos: ImageItem[]
+	promo: PromoItem[]
 	relatedLinks: SourceLink[]
 	documents?: EventDocumentItem[]
 	partners?: EventPartnerItem[]

@@ -3,13 +3,13 @@ import { navigationElements } from './consts'
 import styles from './index.module.scss'
 import { BurgerMenu } from './components/burger-menu/burger-menu'
 import { PersonIconSvg } from 'src/shared/ui/icons/personIconSVG'
-import { AuthModal } from 'src/modals/auth-modal/auth-modal'
-import { useActions } from 'src/app/store/hooks/actions'
+// import { AuthModal } from 'src/modals/auth-modal/auth-modal'
+// import { useActions } from 'src/app/store/hooks/actions'
 import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 export const MainNavigation = () => {
-	const { openModal } = useActions()
+	// const { openModal } = useActions()
 	const location = useLocation()
 	const navigate = useNavigate()
 
@@ -65,11 +65,18 @@ export const MainNavigation = () => {
 						</button>
 					))}
 				</ul>
-				<button className={styles.enterLK} onClick={() => openModal(<AuthModal />)}>
+				<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
+					<div className={styles.vector}>
+						<PersonIconSvg color='#CC1746' />
+					</div>
+				</Link>
+				{/*
+					<button className={styles.enterLK} onClick={() => openModal(<AuthModal />)}>
 					<div className={styles.vector}>
 						<PersonIconSvg color='#CC1746' />
 					</div>
 				</button>
+					*/}
 			</Container>
 		</nav>
 	)

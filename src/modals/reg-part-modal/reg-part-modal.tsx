@@ -214,8 +214,10 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 								<div className={styles.grayBox}>
 									<p>
 										Внимание! Завершение регистрации означает согласие с{' '}
-										<a href='#'>Политикой защиты и обработки персональных данных</a> и{' '}
-										<a href='#'>Правилами посещения игр</a>.
+										<a href={`https://этноспорт.рф/events/1/docs`}>
+											Политикой защиты и обработки персональных данных
+										</a>{' '}
+										и <a href={`https://этноспорт.рф/events/1/rules`}>Правилами посещения игр</a>.
 									</p>
 								</div>
 							</FlexRow>

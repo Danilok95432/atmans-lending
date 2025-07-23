@@ -74,11 +74,11 @@ export const Header = () => {
 								*/}
 							</FlexRow>
 							<FlexRow className={styles.linksRow}>
-								<a href='#' className={styles.linkEl}>
+								<a href={`https://этноспорт.рф/events/1/docs`} className={styles.linkEl}>
 									<FileLinkSVG />
 									<span>Политика защиты и обработки персональных данных</span>
 								</a>
-								<a href='#' className={styles.linkEl}>
+								<a href={`https://этноспорт.рф/events/1/rules`} className={styles.linkEl}>
 									<FileLinkSVG />
 									<span>Правила посещения игр</span>
 								</a>
@@ -111,11 +111,11 @@ export const Header = () => {
 							</Link>
 							*/}
 							<FlexRow className={styles.linksRow}>
-								<a href='#' className={styles.linkEl}>
+								<a href={`https://этноспорт.рф/events/1/docs`} className={styles.linkEl}>
 									<FileLinkSVG />
 									<span>Политика защиты и обработки персональных данных</span>
 								</a>
-								<a href='#' className={styles.linkEl}>
+								<a href={`https://этноспорт.рф/events/1/rules`} className={styles.linkEl}>
 									<FileLinkSVG />
 									<span>Правила посещения игр</span>
 								</a>
