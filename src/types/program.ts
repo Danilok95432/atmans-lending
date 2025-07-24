@@ -1,9 +1,12 @@
+import { type ImageItemWithText } from './photos'
+
 export type ProgramListItem = {
 	id: string
 	time: string
 	place: string
 	title: string
 	use_reg: number
+	photo: ImageItemWithText[]
 }
 
 export type ProgramDay = {

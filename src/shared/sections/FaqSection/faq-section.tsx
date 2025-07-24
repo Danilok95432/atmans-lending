@@ -16,13 +16,13 @@ export const FaqSection = () => {
 					{faqEvent &&
 						[...faqEvent?.faq]
 							.sort((a, b) => Number(a?.id) - Number(b?.id))
-							.map((faqEl) => (
+							.map((faqEl, index) => (
 								<AccordionItem
 									className={styles.faqItem}
 									trigger={faqEl.title}
 									customArrow={<HomeFaqArrow />}
 									content={faqEl.content}
-									key={faqEl.id}
+									key={index}
 								/>
 							))}
 				</div>

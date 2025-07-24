@@ -221,10 +221,18 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 								<div className={styles.grayBox}>
 									<p>
 										Внимание! Завершение регистрации означает согласие с{' '}
-										<a href={`https://этноспорт.рф/events/1/docs`}>
+										<a href={`https://этноспорт.рф/events/1/docs`} target='_blank' rel='noreferrer'>
 											Политикой защиты и обработки персональных данных
 										</a>{' '}
-										и <a href={`https://этноспорт.рф/events/1/rules`}>Правилами посещения игр</a>.
+										и{' '}
+										<a
+											href={`https://этноспорт.рф/events/1/rules`}
+											target='_blank'
+											rel='noreferrer'
+										>
+											Правилами посещения игр
+										</a>
+										.
 									</p>
 								</div>
 							</FlexRow>

@@ -4,7 +4,7 @@ import { type ProgramListItem } from 'src/types/program'
 import skeleton from 'src/assets/img/skeleton-img.png'
 import styles from './index.module.scss'
 import { Link } from 'react-router-dom'
-import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+// import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { homeVideosSliderOptions } from './consts'
@@ -30,11 +30,12 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 							<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
 								<span className={styles.programTitle}>{programEL.title}</span>
 							</Link>
-							{programEL.use_reg === 1 && (
-								<MainButton as='route' to={'#'} className={styles.requestBtn}>
-									Подать заявку
-								</MainButton>
-							)}
+							{/* {programEL.use_reg === 1 && (
+												<MainButton as='route' to={'#'} className={styles.requestBtn}>
+													Подать заявку
+												</MainButton>
+											)}
+												*/}
 						</li>
 					))}
 				</ul>
@@ -46,7 +47,7 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 								<SwiperSlide key={idx} className={styles.listTabSlide}>
 									<figure className={styles.listTabCard} key={programEL.id}>
 										<div className={styles.imgWrapper}>
-											<img src={skeleton} alt='' />
+											<img src={programEL?.photo[0]?.original ?? skeleton} alt='' />
 										</div>
 										<figcaption>
 											<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
@@ -54,11 +55,12 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 											</Link>
 											<p className={styles.programTime}>{programEL.time}</p>
 											<p className={styles.programPlace}>{programEL.place}</p>
-											{programEL.use_reg === 1 && (
+											{/* {programEL.use_reg === 1 && (
 												<MainButton as='route' to={'#'} className={styles.requestBtn}>
 													Подать заявку
 												</MainButton>
 											)}
+												*/}
 										</figcaption>
 									</figure>
 								</SwiperSlide>
@@ -76,7 +78,7 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 					{list.map((programEL) => (
 						<figure className={styles.listTabCard} key={programEL.id}>
 							<div className={styles.imgWrapper}>
-								<img src={skeleton} alt='' />
+								<img src={programEL?.photo[0]?.original ?? skeleton} alt='' />
 							</div>
 							<figcaption>
 								<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
@@ -84,11 +86,12 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 								</Link>
 								<p className={styles.programTime}>{programEL.time}</p>
 								<p className={styles.programPlace}>{programEL.place}</p>
-								{programEL.use_reg === 1 && (
-									<MainButton as='route' to={'#'} className={styles.requestBtn}>
-										Подать заявку
-									</MainButton>
-								)}
+								{/* {programEL.use_reg === 1 && (
+												<MainButton as='route' to={'#'} className={styles.requestBtn}>
+													Подать заявку
+												</MainButton>
+											)}
+												*/}
 							</figcaption>
 						</figure>
 					))}

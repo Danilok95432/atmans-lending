@@ -1,6 +1,7 @@
 .b24-widget-button-wrapper {
   bottom: 0;
   right: 0;
+  z-index: 100;
 }
 
 .bx-livechat-wrapper {
