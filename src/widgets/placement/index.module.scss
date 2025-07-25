@@ -57,11 +57,12 @@
 
 .placeListDesc {
 	p {
-		padding-left: 15px;
+		// padding-left: 15px;
 		position: relative;
 		&:not(:last-child) {
 			margin-bottom: 2px;
 		}
+		/*
 		&::before {
 			content: '';
 			position: absolute;
@@ -72,5 +73,6 @@
 			border-radius: 50%;
 			background: #000000;
 		}
+			*/
 	}
 }

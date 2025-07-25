@@ -53,7 +53,7 @@ export const ProgramSection = () => {
 					</FlexRow>
 					<FlexRow className={styles.contentRow}>
 						<div className={styles.imgWrapper}>
-							<img src='src/assets/img/programImg.jpg' alt='' />
+							<img src='src/assets/img/programImg.png' alt='' />
 						</div>
 						<Swiper
 							{...programSliderOptions}
