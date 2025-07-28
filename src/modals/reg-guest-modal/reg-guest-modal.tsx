@@ -27,6 +27,7 @@ import { LogoModalMobileSVG } from 'src/shared/ui/icons/logoModalMobileSVG'
 import { LogoModalSVG } from 'src/shared/ui/icons/logoModalSVG'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+import { GuestFields } from './components/InfoSection/components/GuestFields/GuestFields'
 
 type RegEventGuestModalProps = {
 	id: string
@@ -45,9 +46,10 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 
 	const methods = useForm<RegGuestInputs>({
 		mode: 'onBlur',
-		resolver: yupResolver(regGuestSchema as any),
+		resolver: yupResolver(regGuestSchema),
 		defaultValues: {
 			group_list: [],
+			cars_list: [],
 		},
 	})
 
@@ -93,10 +95,10 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 		formData.append('use_group', booleanToNumberString(data.use_group))
 		formData.append('group_count', data.group_list?.length.toString() ?? '')
 		data.group_list?.forEach((group, index) => {
-			formData.append(`group_list_age[${index}]`, group.age)
-			formData.append(`group_list_surname[${index}]`, group.surname)
-			formData.append(`group_list_firstname[${index}]`, group.firstname)
-			formData.append(`group_list_fathname[${index}]`, group.fathname)
+			formData.append(`group_list_age[${index}]`, group.age ?? '')
+			formData.append(`group_list_surname[${index}]`, group.surname ?? '')
+			formData.append(`group_list_firstname[${index}]`, group.firstname ?? '')
+			formData.append(`group_list_fathname[${index}]`, group.fathname ?? '')
 		})
 		formData.append('use_car', booleanToNumberString(data.use_car))
 		if (data.use_car) {
@@ -206,6 +208,7 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 								errorForm={errorForm}
 								setErrorForm={setErrorForm}
 							/>
+							<GuestFields />
 							<RegionSection
 								regions={regions?.regions}
 								citys={citys?.citys}
