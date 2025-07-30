@@ -1,3 +1,5 @@
+import { type GuestGroupList } from 'src/types/registration'
+import { type MultiSelOption } from 'src/types/select'
 import * as yup from 'yup'
 
 export type RegInputs = {
@@ -14,7 +16,16 @@ export type RegInputs = {
 	code: string
 	id_reg_type?: string
 	id_event?: string
+	use_group?: boolean
+	group_name?: string
+	id_group_type?: string
+	id_event_role?: string
+	group_count?: string
+	group_list?: GuestGroupList[]
+	etno_list?: string | MultiSelOption[]
+	fun_list?: string | MultiSelOption[]
 	use_lager?: boolean
+	id_lager_type?: string
 	lager_count?: string
 	data_zaezd?: string
 	data_viezd?: string

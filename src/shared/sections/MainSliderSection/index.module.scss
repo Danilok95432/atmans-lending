@@ -1,4 +1,21 @@
 .mainSlider {
+  .sliderCont {
+    position: relative;
+    .eventsSliderBtnsMobile {
+      display: none;
+      @media (max-width: 768px) {
+        display: flex;
+        width: 97%;
+        top: 54%;
+      }
+    }
+    .sliderMain {
+      @media (max-width: 768px) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+    }
+  }
   .controlsMobile {
     flex-direction: column;
     display: none;

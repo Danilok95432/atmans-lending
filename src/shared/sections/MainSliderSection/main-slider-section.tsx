@@ -20,8 +20,8 @@ export const MainSliderSection = () => {
 
 	return (
 		<Section className={cn(styles.mainSlider)}>
-			<Container>
-				<Swiper {...eventsSliderOptions} ref={swiperRef}>
+			<Container className={styles.sliderCont}>
+				<Swiper {...eventsSliderOptions} ref={swiperRef} className={styles.sliderMain}>
 					{sortedPromo.map((slideEl) => {
 						return (
 							<SwiperSlide key={slideEl.id}>
@@ -43,6 +43,7 @@ export const MainSliderSection = () => {
 						)
 					})}
 				</Swiper>
+				<SliderBtns className={styles.eventsSliderBtnsMobile} swiperRef={swiperRef} />
 			</Container>
 		</Section>
 	)

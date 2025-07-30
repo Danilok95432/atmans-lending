@@ -57,7 +57,7 @@ export const Header = () => {
 									Регистрация гостей
 								</MainButton>
 								{/*
-									<MainButton
+								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
 								>
@@ -97,7 +97,7 @@ export const Header = () => {
 									Регистрация гостей
 								</MainButton>
 								{/*
-									<MainButton
+								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
 								>

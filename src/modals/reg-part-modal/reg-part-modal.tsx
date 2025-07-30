@@ -18,13 +18,7 @@ import {
 } from 'src/features/auth/api/auth.api'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
-import {
-	booleanToNumberString,
-	formatDateRange,
-	formatDateToYYYYMMDD,
-	mainFormatDate,
-	transformToFormData,
-} from 'src/shared/helpers/utils'
+import { booleanToNumberString, formatDateRange, mainFormatDate } from 'src/shared/helpers/utils'
 import { LogoModalMobileSVG } from 'src/shared/ui/icons/logoModalMobileSVG'
 import { LogoModalSVG } from 'src/shared/ui/icons/logoModalSVG'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
@@ -79,40 +73,82 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 	const onSubmit: SubmitHandler<RegInputs> = async (data) => {
 		const region = regions?.regions?.filter((reg) => reg.label === data.id_region)[0].value
 		const city = citys?.citys?.filter((nas) => nas.label === data.id_city)[0].value
-		const serverData = {
-			id_reg_type: '1',
-			id_event: id,
-			surname: data.surname,
-			firstname: data.firstname,
-			fathname: data.fathname,
-			age: data.age,
-			birthdate: formatDateToYYYYMMDD(data.birthdate),
-			id_region: region,
-			id_city: city,
-			email: data.email,
-			phone: data.phone,
-			use_lager: booleanToNumberString(data.use_lager),
-			lager_count: data.lager_count,
-			data_zaezd: data.data_zaezd,
-			data_viezd: data.data_viezd,
-			use_sportsmen: booleanToNumberString(data.use_sportsmen),
-			use_folk: booleanToNumberString(data.use_folk),
-			use_trader: booleanToNumberString(data.use_trader),
-			use_master: booleanToNumberString(data.use_master),
-			master_name: data.master_name,
-			use_journalist: booleanToNumberString(data.use_journalist),
-			journal_name: data.journal_name,
-			use_car: booleanToNumberString(data.use_car),
-			id_car_type: data.id_car_type,
-			car_number: data.car_number,
+		let selectedObjEtno = ''
+		let selectedObjFun = ''
+		if (typeof data.etno_list !== 'string' && data.etno_list) {
+			selectedObjEtno = data.etno_list
+				.filter((opt) => opt.selected)
+				.map((opt) => opt.value)
+				.join(',')
 		}
+		if (typeof data.fun_list !== 'string' && data.fun_list) {
+			selectedObjFun = data.fun_list
+				.filter((opt) => opt.selected)
+				.map((opt) => opt.value)
+				.join(',')
+		}
+		const formData = new FormData()
+		formData.append('id_reg_type', '1')
+		formData.append('id_event', id)
+		formData.append('surname', data.surname)
+		formData.append('firstname', data.firstname)
+		formData.append('fathname', data.fathname ?? '')
+		formData.append('birthdate', data.birthdate ?? '')
+		formData.append('id_region', region ?? '')
+		formData.append('id_city', city ?? '')
+		formData.append('phone', data.phone)
+		formData.append('email', data.email ?? '')
+
+		// Групповые данные
+		formData.append('use_group', booleanToNumberString(data.use_group))
+		formData.append('group_name', data.group_name ?? '')
+		formData.append('id_event_role', data.id_event_role ?? '')
+		formData.append('group_count', data.group_list?.length.toString() ?? '0')
+
+		// Данные участников группы
+		data.group_list?.forEach((group, index) => {
+			formData.append(`group_list_age[${index}]`, group.age ?? '')
+			formData.append(`group_list_surname[${index}]`, group.surname ?? '')
+			formData.append(`group_list_firstname[${index}]`, group.firstname ?? '')
+			formData.append(`group_list_fathname[${index}]`, group.fathname ?? '')
+		})
+
+		// Данные лагеря
+		formData.append('use_lager', booleanToNumberString(data.use_lager))
+		formData.append('id_lager_type', data.id_lager_type ?? '')
+		formData.append('lager_count', data.lager_count?.toString() ?? '0')
+		formData.append('data_zaezd', data.data_zaezd ?? '')
+		formData.append('data_viezd', data.data_viezd ?? '')
+
+		// Данные спортсменов и активности
+		formData.append('use_sportsmen', booleanToNumberString(data.use_sportsmen))
+		formData.append(
+			'etno_list',
+			typeof data.etno_list === 'string' ? data.etno_list : data.etno_list ? selectedObjEtno : '0',
+		)
+		formData.append(
+			'fun_list',
+			typeof data.fun_list === 'string' ? data.fun_list : data.fun_list ? selectedObjFun : '0',
+		)
+
+		// Специальные категории
+		formData.append('use_folk', booleanToNumberString(data.use_folk))
+		formData.append('use_trader', booleanToNumberString(data.use_trader))
+		formData.append('use_master', booleanToNumberString(data.use_master))
+		formData.append('master_name', data.master_name ?? '')
+		formData.append('use_journalist', booleanToNumberString(data.use_journalist))
+		formData.append('journal_name', data.journal_name ?? '')
+
+		// Данные транспорта
+		formData.append('use_car', booleanToNumberString(data.use_car))
+		formData.append('id_car_type', data.id_car_type ?? '')
+		formData.append('car_number', data.car_number ?? '')
 		try {
 			if (isCodeAccepted) {
-				const regForm = transformToFormData(serverData)
-				if (serverData.id_city === '' || serverData.id_city === undefined) {
-					regForm.append('city_name', data.id_city)
+				if (city === '' || city === undefined) {
+					formData.append('city_name', data.id_city)
 				}
-				const res = (await saveRegForm(regForm)) as unknown as {
+				const res = (await saveRegForm(formData)) as unknown as {
 					data: { status: string; errortext: string }
 				}
 				if (res.data.status === 'ok') {
@@ -208,6 +244,9 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 							<PartSection
 								selectOptionsCars={selectOptions?.car_types}
 								selectOptionsLager={selectOptions?.lager_types}
+								selectOptionsGroup={selectOptions?.event_roles}
+								etnoList={selectOptions?.etnosport}
+								funList={selectOptions?.zabavy}
 							/>
 							<DatesSection selectOptions={selectOptions?.dates} />
 							<FlexRow className={cn(styles.disclaimer, styles._last)}>

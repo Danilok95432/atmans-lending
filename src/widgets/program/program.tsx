@@ -13,14 +13,26 @@ type EventProgramProps = {
 export const Program: FC<EventProgramProps> = ({ programDays, parentView = 'list' }) => {
 	const [activeDayId, setActiveDayId] = useState(0)
 
-	const navDays = programDays.map((day) => ({ id: day.id, date: day.date }))
+	const filteredDays = programDays.filter((day) =>
+		day.programList.some((program) => program.use_real === 1),
+	)
+
+	const safeActiveDayId = filteredDays.some((day) => day.id === activeDayId)
+		? activeDayId
+		: filteredDays[0]?.id || 0
+
+	const navDays = filteredDays.map((day) => ({
+		id: day.id,
+		date: day.date,
+	}))
 
 	const handleChangeActiveDay = (id: number) => {
 		setActiveDayId(id)
 	}
+
 	const getActiveProgram = () => {
-		const currentDay = programDays.find((day) => day.id === activeDayId)
-		return currentDay?.programList ?? []
+		const currentDay = programDays.find((day) => day.id === safeActiveDayId)
+		return currentDay?.programList?.filter((program) => program.use_real === 1) || []
 	}
 
 	if (!programDays?.length) return <h4>нет программы</h4>
@@ -30,7 +42,7 @@ export const Program: FC<EventProgramProps> = ({ programDays, parentView = 'list
 			<FlexRow className={styles.headProgram}>
 				<ProgramNav
 					days={navDays}
-					activeDayId={activeDayId}
+					activeDayId={safeActiveDayId}
 					onChangeActiveDay={handleChangeActiveDay}
 				/>
 			</FlexRow>

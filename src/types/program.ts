@@ -6,6 +6,7 @@ export type ProgramListItem = {
 	place: string
 	title: string
 	use_reg: number
+	use_real: number
 	photo: ImageItemWithText[]
 }
 

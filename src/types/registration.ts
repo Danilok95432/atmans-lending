@@ -10,6 +10,11 @@ export type RegistrationParticipant = {
 	phone: string
 	id_reg_type: string
 	id_event: string
+	use_group: boolean
+	group_name: string
+	id_group_type: string
+	group_count: string
+	group_list: GuestGroupList[]
 	use_lager: boolean
 	lager_count: string
 	data_zaezd: string

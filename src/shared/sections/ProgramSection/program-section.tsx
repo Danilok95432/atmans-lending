@@ -29,7 +29,7 @@ export const ProgramSection = () => {
 
 	const getGroupedProgram = () => {
 		const list = programDays?.find((day) => day.id === activeDayId)?.programList ?? []
-		return list.reduce<Record<string, typeof list>>((acc, programEl) => {
+		const grouped = list.reduce<Record<string, typeof list>>((acc, programEl) => {
 			const place = programEl.place || 'Место не указано'
 			if (!acc[place]) {
 				acc[place] = []
@@ -37,6 +37,20 @@ export const ProgramSection = () => {
 			acc[place].push(programEl)
 			return acc
 		}, {})
+		if (activeDayId === 1) {
+			const CENTRAL_FIELD = 'Центральное поле'
+			const orderedGroups: Record<string, typeof list> = {}
+			if (grouped[CENTRAL_FIELD]) {
+				orderedGroups[CENTRAL_FIELD] = grouped[CENTRAL_FIELD]
+			}
+			Object.keys(grouped).forEach((place) => {
+				if (place !== CENTRAL_FIELD) {
+					orderedGroups[place] = grouped[place]
+				}
+			})
+			return orderedGroups
+		}
+		return grouped
 	}
 
 	return (
@@ -85,11 +99,15 @@ export const ProgramSection = () => {
 													<FlexRow key={programEl.id} className={styles.elRow}>
 														<p>{programEl.time}</p>
 														{breakPoint === 'S' ? null : <DefisSVG />}
-														<Link
-															to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
-														>
+														{programEl?.use_real ? (
+															<Link
+																to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
+															>
+																<p>{programEl.title}</p>
+															</Link>
+														) : (
 															<p>{programEl.title}</p>
-														</Link>
+														)}
 													</FlexRow>
 												))}
 											</div>
