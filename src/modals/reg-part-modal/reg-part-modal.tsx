@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { FormProvider, type SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import type * as yup from 'yup'
 
 import styles from './index.module.scss'
 import { type FC, useEffect, useRef, useState } from 'react'
@@ -42,8 +44,35 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 
 	const methods = useForm<RegInputs>({
 		mode: 'onBlur',
-		resolver: yupResolver(regSchema),
+		resolver: yupResolver(regSchema as unknown as yup.ObjectSchema<RegInputs>),
+		defaultValues: {
+			group_list: [{ age: '', surname: '', firstname: '', fathname: '' }],
+		},
 	})
+
+	const {
+		formState: { isValid, errors },
+	} = methods
+
+	const useGroup = useWatch({ control: methods.control, name: 'use_group' })
+	const useSportsmen = useWatch({ control: methods.control, name: 'use_sportsmen' })
+	const useFolk = useWatch({ control: methods.control, name: 'use_folk' })
+	const useMaster = useWatch({ control: methods.control, name: 'use_master' })
+	const useTrader = useWatch({ control: methods.control, name: 'use_trader' })
+	const useOrg = useWatch({ control: methods.control, name: 'use_org' })
+	const useVolunteer = useWatch({ control: methods.control, name: 'use_volunteer' })
+	const useJournalist = useWatch({ control: methods.control, name: 'use_journalist' })
+
+	const useFlags = [
+		useGroup,
+		useSportsmen,
+		useFolk,
+		useMaster,
+		useTrader,
+		useOrg,
+		useVolunteer,
+		useJournalist,
+	]
 
 	const [lockSearch, setLockSearch] = useState<boolean>(false)
 
@@ -73,19 +102,19 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 	const onSubmit: SubmitHandler<RegInputs> = async (data) => {
 		const region = regions?.regions?.filter((reg) => reg.label === data.id_region)[0].value
 		const city = citys?.citys?.filter((nas) => nas.label === data.id_city)[0].value
-		let selectedObjEtno = ''
-		let selectedObjFun = ''
-		if (typeof data.etno_list !== 'string' && data.etno_list) {
-			selectedObjEtno = data.etno_list
-				.filter((opt) => opt.selected)
-				.map((opt) => opt.value)
-				.join(',')
-		}
-		if (typeof data.fun_list !== 'string' && data.fun_list) {
-			selectedObjFun = data.fun_list
-				.filter((opt) => opt.selected)
-				.map((opt) => opt.value)
-				.join(',')
+		let selectedObjSubEvents = ''
+
+		if (data.use_group && typeof data.sub_events_group === 'string') {
+			selectedObjSubEvents = data.sub_events_group
+		} else {
+			const etno = typeof data.sub_events_etno === 'string' ? data.sub_events_etno.split(',') : []
+			const fun = Array.isArray(data.sub_events_fun)
+				? data.sub_events_fun.filter(Boolean)
+				: typeof data.sub_events_fun === 'string'
+					? data.sub_events_fun.split(',')
+					: []
+
+			selectedObjSubEvents = [...etno, ...fun].join(',')
 		}
 		const formData = new FormData()
 		formData.append('id_reg_type', '1')
@@ -122,22 +151,18 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 
 		// Данные спортсменов и активности
 		formData.append('use_sportsmen', booleanToNumberString(data.use_sportsmen))
-		formData.append(
-			'etno_list',
-			typeof data.etno_list === 'string' ? data.etno_list : data.etno_list ? selectedObjEtno : '0',
-		)
-		formData.append(
-			'fun_list',
-			typeof data.fun_list === 'string' ? data.fun_list : data.fun_list ? selectedObjFun : '0',
-		)
 
 		// Специальные категории
 		formData.append('use_folk', booleanToNumberString(data.use_folk))
 		formData.append('use_trader', booleanToNumberString(data.use_trader))
 		formData.append('use_master', booleanToNumberString(data.use_master))
+		formData.append('use_org', booleanToNumberString(data.use_org))
+		formData.append('use_volunteer', booleanToNumberString(data.use_volunteer))
 		formData.append('master_name', data.master_name ?? '')
 		formData.append('use_journalist', booleanToNumberString(data.use_journalist))
 		formData.append('journal_name', data.journal_name ?? '')
+
+		formData.append('sub_events_list', selectedObjSubEvents)
 
 		// Данные транспорта
 		formData.append('use_car', booleanToNumberString(data.use_car))
@@ -245,10 +270,12 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 								selectOptionsCars={selectOptions?.car_types}
 								selectOptionsLager={selectOptions?.lager_types}
 								selectOptionsGroup={selectOptions?.event_roles}
-								etnoList={selectOptions?.etnosport}
-								funList={selectOptions?.zabavy}
+								subEvents={selectOptions?.sub_events}
 							/>
 							<DatesSection selectOptions={selectOptions?.dates} />
+							{errors.root?.message && (
+								<div className={styles.errorMessage}>{errors.root.message}</div>
+							)}
 							<FlexRow className={cn(styles.disclaimer, styles._last)}>
 								<div className={styles.grayBox}>
 									<p>
@@ -260,7 +287,10 @@ export const RegEventPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 									</p>
 								</div>
 							</FlexRow>
-							<MainButton type='submit' disabled={!isCodeAccepted}>
+							<MainButton
+								type='submit'
+								disabled={!isCodeAccepted || !isValid || useFlags.filter((el) => el).length === 0}
+							>
 								Завершить регистрацию
 							</MainButton>
 						</form>

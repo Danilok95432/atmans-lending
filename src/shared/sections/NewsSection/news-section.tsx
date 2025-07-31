@@ -128,6 +128,9 @@ export const NewsSection = () => {
 					<>
 						<FlexRow className={styles.newsSectionRow}>
 							<h2>Новости</h2>
+							<MainButton as='route' to={`https://этноспорт.рф/news`}>
+								Все новости
+							</MainButton>
 						</FlexRow>
 						{newsList && newsList?.length > 0 && (
 							<>

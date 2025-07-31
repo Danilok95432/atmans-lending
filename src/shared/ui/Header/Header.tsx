@@ -8,7 +8,7 @@ import { MainButton } from '../MainButton/MainButton'
 import { FileLinkSVG } from '../icons/fileLinkSVG'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { LogoMobileSVG } from '../icons/logoMobileSVG'
-// import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
+import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
 import { useActions } from 'src/app/store/hooks/actions'
 import { RegEventGuestModal } from 'src/modals/reg-guest-modal/reg-guest-modal'
 import { Link } from 'react-router-dom'
@@ -87,23 +87,23 @@ export const Header = () => {
 					) : (
 						<FlexRow className={styles.controlsRow}>
 							<FlexRow>
+								{/*
 								<p className={styles.starts}>
 									Регистрация участников игр <br /> начнётся с 1 августа
 								</p>
+								*/}
 								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
 								>
 									Регистрация гостей
 								</MainButton>
-								{/*
 								<MainButton
 									className={styles.headerBtn}
 									onClick={() => openModal(<RegEventPartModal id={'1'} />)}
 								>
 									Регистрация участников
 								</MainButton>
-									*/}
 							</FlexRow>
 							{/*
 							<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>

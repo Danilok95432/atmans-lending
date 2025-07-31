@@ -2,7 +2,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { type FieldValues } from 'react-hook-form'
 import { MAIN_PROD_URL } from 'src/shared/helpers/consts'
 
-import { type MultiSelOption, type SelOption } from 'src/types/select'
+import {
+	type RoleSelOption,
+	type MultiSelOption,
+	type SelOption,
+	type SubEventOptions,
+} from 'src/types/select'
 
 export const authApi = createApi({
 	reducerPath: 'auth/api',
@@ -69,7 +74,8 @@ export const authApi = createApi({
 				guest_group_types?: SelOption[]
 				etnosport?: MultiSelOption[]
 				zabavy?: MultiSelOption[]
-				event_roles?: SelOption[]
+				event_roles?: RoleSelOption[]
+				sub_events?: SubEventOptions[]
 			},
 			string
 		>({

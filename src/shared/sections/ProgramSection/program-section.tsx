@@ -103,7 +103,7 @@ export const ProgramSection = () => {
 															<Link
 																to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
 															>
-																<p>{programEl.title}</p>
+																{programEl.title}
 															</Link>
 														) : (
 															<p>{programEl.title}</p>

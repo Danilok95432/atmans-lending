@@ -64,9 +64,18 @@
             gap: 0;
             margin-bottom: 10px;
           }
+          a {
+            color: #CC1746;
+            font-size: 20px;
+            max-width: 600px;
+            @media (max-width: 768px) {
+              font-size: 17px;
+            }
+          }
           p {
             font-size: 20px;
             max-width: 600px;
+            min-width: 125px;
             @media (max-width: 768px) {
               font-size: 17px;
             }
@@ -75,7 +84,7 @@
             margin-top: 12px;
           }
           p:last-child {
-            color: #CC1746;
+            color: #000;
             @media (max-width: 768px) {
               font-size: 17px;
             }
