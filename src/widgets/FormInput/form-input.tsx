@@ -325,7 +325,10 @@ export const FormInput: React.FC<TextInputProps> = ({
 											[styles.resend]: countdown > 0 && !isCodeAccepted,
 											[styles.codeAccepted]: isCodeAccepted,
 										})}
-										onClick={async () => await handleSendCode(fieldValue)}
+										onClick={async (e: { preventDefault: () => void }) => {
+											e.preventDefault()
+											await handleSendCode(fieldValue)
+										}}
 										disabled={
 											(!fieldValue || fieldValue.includes('_') || isSended) &&
 											countdown > 0 &&

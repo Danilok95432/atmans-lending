@@ -34,6 +34,14 @@
           padding: 0px 6px;
           border-radius: 5px;
         }
+        .react-dropdown-select-option-label {
+          @media (max-width: 500px) {
+            max-width: 240px;
+            text-wrap: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
       }
 		}
 

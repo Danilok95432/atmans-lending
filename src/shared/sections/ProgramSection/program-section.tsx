@@ -12,6 +12,8 @@ import { type RefObject, useRef } from 'react'
 import { programSliderOptions } from './consts'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { Link } from 'react-router-dom'
+import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+import { toast } from 'react-toastify'
 
 export const ProgramSection = () => {
 	const { data: programDays } = useGetEventProgramByIdQuery('1')
@@ -53,6 +55,46 @@ export const ProgramSection = () => {
 		return grouped
 	}
 
+	const handleCopyDataProgram = () => {
+		const currentDay = programDays?.find((day) => day.id === activeDayId)
+		if (!currentDay) return
+		let textToCopy = `Программа на ${currentDay.date}\n\n`
+
+		const dayTitle =
+			activeDayId === 1
+				? 'Основной день игр'
+				: activeDayId === 2
+					? 'Последний день игр'
+					: 'Первый день игр'
+		textToCopy += `${dayTitle}\n\n`
+		const groupedProgram = getGroupedProgram()
+		for (const [place, items] of Object.entries(groupedProgram)) {
+			textToCopy += `${place}:\n`
+			for (const item of items) {
+				textToCopy += `${item.time} - ${item.title}\n`
+			}
+			textToCopy += '\n'
+		}
+		navigator.clipboard
+			.writeText(textToCopy)
+			.then(() => {
+				toast.success('Данные программы в буфере обмена', {
+					position: 'bottom-right',
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				})
+			})
+			.catch(() => {
+				toast.error('Произошла ошибка при копировании', {
+					position: 'bottom-right',
+				})
+			})
+	}
+
 	return (
 		<Section id='program' className={cn(styles.program)}>
 			<Container>
@@ -64,6 +106,7 @@ export const ProgramSection = () => {
 							activeDayId={activeDayId}
 							changeSlide={goToDay}
 						/>
+						<MainButton onClick={handleCopyDataProgram}>Копировать программу дня</MainButton>
 					</FlexRow>
 					<FlexRow className={styles.contentRow}>
 						<div className={styles.imgWrapper}>
