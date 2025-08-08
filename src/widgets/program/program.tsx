@@ -8,10 +8,15 @@ import { ProgramNav } from './components/program-nav/program-nav'
 type EventProgramProps = {
 	programDays: ProgramDay[] | []
 	parentView?: string
+	defaultActiveDay?: number
 }
 
-export const Program: FC<EventProgramProps> = ({ programDays, parentView = 'list' }) => {
-	const [activeDayId, setActiveDayId] = useState(0)
+export const Program: FC<EventProgramProps> = ({
+	programDays,
+	parentView = 'list',
+	defaultActiveDay = 0,
+}) => {
+	const [activeDayId, setActiveDayId] = useState(defaultActiveDay)
 
 	const filteredDays = programDays.filter((day) =>
 		day.programList.some((program) => program.use_real === 1),
@@ -32,7 +37,7 @@ export const Program: FC<EventProgramProps> = ({ programDays, parentView = 'list
 
 	const getActiveProgram = () => {
 		const currentDay = programDays.find((day) => day.id === safeActiveDayId)
-		return currentDay?.programList?.filter((program) => program.use_real === 1) || []
+		return currentDay?.programList?.filter((program) => program.use_real === 1) ?? []
 	}
 
 	if (!programDays?.length) return <h4>нет программы</h4>

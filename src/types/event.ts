@@ -63,6 +63,13 @@ export type PartnerGeneralLinksType = {
 	mainphotoGL?: ImageItemWithText[]
 }
 
+export type BasePartnerLinksType = {
+	id: string
+	link: string
+	title: string
+	mainphoto?: ImageItemWithText[]
+}
+
 export type SponsorsLinksType = {
 	id: string
 	link: string
@@ -112,6 +119,7 @@ export type EventItem = {
 	organizerGameLinks: OrganizerGameLinksType[]
 	partnerLinks: PartnerLinksType[]
 	partnerGeneralLinks: PartnerGeneralLinksType[]
+	infopartners: BasePartnerLinksType[]
 	sponsors: SponsorsLinksType[]
 	infoblock: InfoBlockContent
 	news: CardNewsItem[]

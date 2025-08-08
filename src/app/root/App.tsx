@@ -1,6 +1,11 @@
-import { HomePage } from 'src/pages/HomePage'
+import { MainRoutes } from '../router/MainRoutes'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
 
 export const App = () => {
-	return <HomePage />
+	return (
+		<Routes>
+			<Route path='/*' element={<MainRoutes />} />
+		</Routes>
+	)
 }

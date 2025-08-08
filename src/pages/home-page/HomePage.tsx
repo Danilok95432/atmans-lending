@@ -1,6 +1,4 @@
 import { MainNavigation } from 'src/widgets/main-navigation/main-navigation'
-import { Footer } from '../shared/ui/Footer/Footer'
-import { Header } from '../shared/ui/Header/Header'
 import { AwardsSection } from 'src/shared/sections/AwardsSection/awards-section'
 import { MainSliderSection } from 'src/shared/sections/MainSliderSection/main-slider-section'
 import { NewsSection } from 'src/shared/sections/NewsSection/news-section'
@@ -16,6 +14,9 @@ import { SubEventsSection } from 'src/shared/sections/SubEventsSection/sub-event
 import { ProgramSection } from 'src/shared/sections/ProgramSection/program-section'
 import { EventsSection } from 'src/shared/sections/EventsSection/events-section'
 import { FinancialPartnersSection } from 'src/shared/sections/FinancialPartners/financial-partners-section'
+import { Header } from 'src/shared/ui/Header/Header'
+import { Footer } from 'src/shared/ui/Footer/Footer'
+import { InfoPartnersSection } from 'src/shared/sections/InfoPartnersSection/info-partners-section'
 
 export const HomePage = () => {
 	return (
@@ -31,6 +32,7 @@ export const HomePage = () => {
 			<ProgramSection />
 			<FinancialPartnersSection />
 			<EventsSection />
+			<InfoPartnersSection />
 			<SubEventsSection />
 			<OrgsEventsSection />
 			<VideosSection />

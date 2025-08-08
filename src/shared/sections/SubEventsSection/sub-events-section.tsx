@@ -15,7 +15,7 @@ export const SubEventsSection = () => {
 					<FlexRow className={styles.headProgram}>
 						<h2>Подсобытия</h2>
 					</FlexRow>
-					<Program programDays={programDays ?? []} parentView={'tab'} />
+					<Program programDays={programDays ?? []} parentView={'tab'} defaultActiveDay={1} />
 				</div>
 			</Container>
 		</Section>
