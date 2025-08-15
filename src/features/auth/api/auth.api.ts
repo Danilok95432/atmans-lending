@@ -16,7 +16,10 @@ export const authApi = createApi({
 		baseUrl: MAIN_PROD_URL,
 	}),
 	endpoints: (build) => ({
-		getRegistrationCode: build.mutation<{ status: string; errortext?: string }, string>({
+		getRegistrationCode: build.mutation<
+			{ status: string; errortext?: string; ticket?: string },
+			string
+		>({
 			query: (phone) => ({
 				url: '/registration/getcode',
 				method: 'GET',
@@ -25,7 +28,10 @@ export const authApi = createApi({
 				},
 			}),
 		}),
-		checkRegistrationCode: build.mutation<{ status: string; errortext: string }, FieldValues>({
+		checkRegistrationCode: build.mutation<
+			{ status: string; errortext: string; ticket: string },
+			FieldValues
+		>({
 			query: (formData) => ({
 				url: '/registration/checkcode',
 				method: 'POST',

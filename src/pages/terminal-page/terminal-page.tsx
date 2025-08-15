@@ -7,10 +7,12 @@ import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { LogoMobileSVG } from 'src/shared/ui/icons/logoMobileSVG'
 import { LogoTerminalSVG } from 'src/shared/ui/icons/LogoTerminalSVG'
+import { useNavigate } from 'react-router-dom'
 
 export const TerminalPage = () => {
 	const { openModal } = useActions()
 	const breakPoint = useBreakPoint()
+	const navigate = useNavigate()
 	return (
 		<div className={styles.terminal}>
 			{breakPoint === 'S' ? <LogoMobileSVG /> : <LogoTerminalSVG />}
@@ -19,7 +21,7 @@ export const TerminalPage = () => {
 					className={styles.sendBtn}
 					onClick={() => openModal(<RegEventGuestModal id={'1'} />)}
 				>
-					Регистрация гостя
+					Регистрация гостей
 				</MainButton>
 				<MainButton
 					className={styles.sendBtn}
@@ -27,6 +29,15 @@ export const TerminalPage = () => {
 				>
 					Регистрация участников
 				</MainButton>
+				<FlexRow className={styles.printBlock}>
+					<p>
+						Если Вы уже прошли регистрацию и у Вас при себе работающий телефон, Вы можете
+						распечатать Ваш билет
+					</p>
+					<MainButton className={styles.printBtn} onClick={() => navigate('print')}>
+						Печать билета
+					</MainButton>
+				</FlexRow>
 			</FlexRow>
 		</div>
 	)

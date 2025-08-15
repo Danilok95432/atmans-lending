@@ -38,6 +38,8 @@ interface CustomProps {
 	setRegionValue?: (arg0: string) => void
 	lockSearch?: boolean
 	setLockSearch?: (arg0: boolean) => void
+	sendCodeClass?: string
+	setTicketUrl?: (arg0: string) => void
 }
 
 type TextInputProps = InputHTMLAttributes<HTMLInputElement> & CustomProps
@@ -71,6 +73,8 @@ export const FormInput: React.FC<TextInputProps> = ({
 	disabled,
 	accept,
 	setSearchValue,
+	sendCodeClass,
+	setTicketUrl,
 	...restProps
 }) => {
 	const { register, control, watch } = useFormContext()
@@ -98,11 +102,12 @@ export const FormInput: React.FC<TextInputProps> = ({
 				})
 				return
 			}
-			const { status, errortext } = response.data
+			const { status, errortext, ticket } = response.data
 
 			if (status === 'ok') {
 				setIsSended(true)
 				setIsCodeAccepted?.(false)
+				setTicketUrl?.(ticket ?? '')
 				setErrorForm?.('')
 				setCountdown(120)
 
@@ -321,7 +326,7 @@ export const FormInput: React.FC<TextInputProps> = ({
 								</InputMask>
 								{isPhoneWithCode && (
 									<MainButton
-										className={cn(styles.sendCodeBtn, {
+										className={cn(sendCodeClass, styles.sendCodeBtn, {
 											[styles.resend]: countdown > 0 && !isCodeAccepted,
 											[styles.codeAccepted]: isCodeAccepted,
 										})}
