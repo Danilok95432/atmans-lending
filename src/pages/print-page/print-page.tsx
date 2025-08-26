@@ -4,7 +4,6 @@ import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { LogoMobileSVG } from 'src/shared/ui/icons/logoMobileSVG'
 import { LogoTerminalSVG } from 'src/shared/ui/icons/LogoTerminalSVG'
-import { useNavigate } from 'react-router-dom'
 import { useActions } from 'src/app/store/hooks/actions'
 import { RegEventGuestModal } from 'src/modals/reg-guest-modal/reg-guest-modal'
 import { RegEventPartModal } from 'src/modals/reg-part-modal/reg-part-modal'
@@ -13,11 +12,11 @@ import { useState } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
 import { type checkInputs, checkSchema } from './schema'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from 'react-router-dom'
 
 export const PrintPage = () => {
 	const { openModal } = useActions()
 	const breakPoint = useBreakPoint()
-	const navigate = useNavigate()
 	const [isCodeAccepted, setIsCodeAccepted] = useState(false)
 	const [ticketUrl, setTicketUrl] = useState<string>('')
 
@@ -34,9 +33,14 @@ export const PrintPage = () => {
 		console.log(data)
 	}
 
+	const navigate = useNavigate()
+
 	return (
 		<div className={styles.printPage}>
 			{breakPoint === 'S' ? <LogoMobileSVG /> : <LogoTerminalSVG />}
+			<MainButton className={styles.backBtn} onClick={() => navigate('/terminal')}>
+				На главную
+			</MainButton>
 			<p className={styles.desc}>
 				Здесь Вы можете распечатать билет, полученный Вами при регистрации. Для этого нужно ввести
 				номер Вашего телефона и подтвердить его при помощи кода, присланного в СМС.
@@ -64,6 +68,7 @@ export const PrintPage = () => {
 								isCode
 								isCodeAccepted={isCodeAccepted}
 								setIsCodeAccepted={setIsCodeAccepted}
+								setTicketUrl={setTicketUrl}
 								className={styles.noMargin}
 							/>
 							{!isCodeAccepted && errors.code && (
@@ -101,9 +106,9 @@ export const PrintPage = () => {
 			{isCodeAccepted && ticketUrl !== '' && (
 				<FlexRow className={styles.printBlock}>
 					<p>Ваш билет найден. Можете его просмотреть и распечатать</p>
-					<MainButton className={styles.printBtn} onClick={() => navigate(ticketUrl)}>
+					<a className={styles.printBtn} href={ticketUrl} target='_blank' rel='noreferrer'>
 						Показать билет
-					</MainButton>
+					</a>
 				</FlexRow>
 			)}
 		</div>

@@ -246,6 +246,7 @@ export const FormInput: React.FC<TextInputProps> = ({
 								if ('data' in res && res.data?.status === 'ok') {
 									setStatus('ok')
 									setIsCodeAccepted?.(true)
+									setTicketUrl?.(res.data?.ticket_link ?? '')
 								} else {
 									setStatus('error')
 									setIsCodeAccepted?.(false)

@@ -8,6 +8,7 @@ import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { ControlledSelect } from 'src/widgets/controlled-select/controlled-select'
 import { ParticipantsFields } from './components/ParticipantsFields/ParticiapantsFields'
 import { ControlledMultipleSelect } from 'src/widgets/controlled-multiple-select/controlled-multiple-select'
+import { useLocation } from 'react-router-dom'
 
 type PartSectionProps = {
 	selectOptionsGroup?: SelOption[]
@@ -25,6 +26,7 @@ export const PartSection: FC<PartSectionProps> = ({
 	],
 }) => {
 	const { control } = useFormContext()
+	const location = useLocation()
 
 	const useGroup = useWatch({ control, name: 'use_group' })
 	const groupType = useWatch({ control, name: 'id_event_role' })
@@ -40,8 +42,6 @@ export const PartSection: FC<PartSectionProps> = ({
 	const useLager = useWatch({ control, name: 'use_lager' })
 
 	const groupDisabled = !useGroup
-	const masterDisabled = !useMaster
-	const traderDisabled = !useTrader
 	const journalistDisabled = !useJournalist
 	const carsDisabled = !useCar
 	const lagerDisabled = !useLager
@@ -120,7 +120,9 @@ export const PartSection: FC<PartSectionProps> = ({
 											<ControlledSelect
 												className={styles.selectForm}
 												name='id_event_role'
-												selectOptions={selectOptionsGroup}
+												selectOptions={selectOptionsGroup.filter(
+													(el) => el.label !== 'Торговцы' && el.label !== 'Мастера',
+												)}
 												disabled={groupDisabled}
 												label='Тип группы'
 											/>
@@ -266,41 +268,6 @@ export const PartSection: FC<PartSectionProps> = ({
 					</div>
 					<div className={styles.checkBoxWrapper}>
 						<div className={styles.headBox}>
-							<ControlledCheckbox name='use_trader' type='checkbox' disabled={useGroup} />
-							<span>Я торгую на ярмарке.</span>
-						</div>
-						<div className={styles.footerBox}>
-							<p>
-								Заявки на участие в ярмарке подаются до 15 августа. По результатам с Вами свяжется
-								представитель организаторов. Организаторы вправе отказать участникам ярмарки без
-								объяснения причин.
-							</p>
-							<div className={styles.footerBoxTrader}>
-								<FormInput
-									name='trader_name'
-									label='Описание товаров'
-									className={styles.noMargin}
-									disabled={traderDisabled}
-								/>
-							</div>
-						</div>
-					</div>
-					<div className={styles.checkBoxWrapper}>
-						<div className={styles.headBox}>
-							<ControlledCheckbox name='use_master' type='checkbox' disabled={useGroup} />
-							<span>Я — мастер народных промыслов и ремесел</span>
-						</div>
-						<div className={styles.footerBox}>
-							<FormInput
-								name='master_name'
-								label='Название промысла'
-								className={styles.noMargin}
-								disabled={masterDisabled}
-							/>
-						</div>
-					</div>
-					<div className={styles.checkBoxWrapper}>
-						<div className={styles.headBox}>
 							<ControlledCheckbox name='use_journalist' type='checkbox' disabled={useGroup} />
 							<span>Я — журналист</span>
 						</div>
@@ -315,50 +282,54 @@ export const PartSection: FC<PartSectionProps> = ({
 					</div>
 				</>
 			)}
-			<div className={styles.checkBoxWrapper}>
-				<div className={styles.headBox}>
-					<ControlledCheckbox name='use_car' type='checkbox' />
-					<span>Еду на машине, нужна парковка</span>
-				</div>
-				<div className={styles.footerBox}>
-					<FlexRow className={styles.groupInputsStart}>
-						<div className={styles.carsList}>
-							<ControlledSelect
-								className={styles.selectForm}
-								name={`id_car_type`}
-								selectOptions={selectOptionsCars}
-								disabled={carsDisabled}
-								label='Тип ТС'
-							/>
-							<FormInput name={`car_number`} label='Госномер' disabled={carsDisabled} />
+			{!location.pathname.includes('/terminal') && (
+				<>
+					<div className={styles.checkBoxWrapper}>
+						<div className={styles.headBox}>
+							<ControlledCheckbox name='use_car' type='checkbox' />
+							<span>Еду на машине, нужна парковка</span>
 						</div>
-					</FlexRow>
-				</div>
-			</div>
-			<div className={styles.checkBoxWrapper}>
-				<div className={styles.headBox}>
-					<ControlledCheckbox name='use_lager' type='checkbox' />
-					<span>Нужно место в палаточном лагере</span>
-				</div>
-				<div className={styles.footerBox}>
-					<FlexRow className={styles.groupInputs}>
-						<ControlledSelect
-							className={styles.selectForm}
-							name='id_lager_type'
-							selectOptions={selectOptionsLager}
-							disabled={lagerDisabled}
-							label='Лагерь'
-						/>
-						<FormInput
-							name='lager_count'
-							label='Всего палаток (1 шатер равен 3 палаткам)'
-							className={styles.noMargin}
-							disabled={lagerDisabled}
-							isSmallLabel={true}
-						/>
-					</FlexRow>
-				</div>
-			</div>
+						<div className={styles.footerBox}>
+							<FlexRow className={styles.groupInputsStart}>
+								<div className={styles.carsList}>
+									<ControlledSelect
+										className={styles.selectForm}
+										name={`id_car_type`}
+										selectOptions={selectOptionsCars}
+										disabled={carsDisabled}
+										label='Тип ТС'
+									/>
+									<FormInput name={`car_number`} label='Госномер' disabled={carsDisabled} />
+								</div>
+							</FlexRow>
+						</div>
+					</div>
+					<div className={styles.checkBoxWrapper}>
+						<div className={styles.headBox}>
+							<ControlledCheckbox name='use_lager' type='checkbox' />
+							<span>Нужно место в палаточном лагере</span>
+						</div>
+						<div className={styles.footerBox}>
+							<FlexRow className={styles.groupInputs}>
+								<ControlledSelect
+									className={styles.selectForm}
+									name='id_lager_type'
+									selectOptions={selectOptionsLager}
+									disabled={lagerDisabled}
+									label='Лагерь'
+								/>
+								<FormInput
+									name='lager_count'
+									label='Всего палаток (1 шатер равен 3 палаткам)'
+									className={styles.noMargin}
+									disabled={lagerDisabled}
+									isSmallLabel={true}
+								/>
+							</FlexRow>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	)
 }

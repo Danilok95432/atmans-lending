@@ -12,8 +12,27 @@
 	.desc {
 		font-size: 25px;
 		text-align: center;
-		padding: 75px 0 60px 0;
+		padding: 25px 0 60px 0;
 		max-width: 850px;
+	}
+	.backBtn {
+		margin: 25px 0 0 0;
+		width: 100%;
+		max-width: 300px;
+		background: #cc1746;
+		padding: 12px 0;
+		font-size: 24px;
+		height: auto;
+		color: #ffffff;
+		border-radius: 5px;
+		border: none;
+		text-decoration: none;
+		font-weight: 400;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition: all .3s;
 	}
 	.formRow {
 		flex-direction: column;
@@ -94,6 +113,16 @@
 			padding: 25px 0;
 			font-size: 40px;
 			height: auto;
+			color: #ffffff;
+			border-radius: 5px;
+			border: none;
+			text-decoration: none;
+			font-weight: 400;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			transition: all .3s;
 			@media (max-width: 768px) {
 				font-size: 32px;
 			}

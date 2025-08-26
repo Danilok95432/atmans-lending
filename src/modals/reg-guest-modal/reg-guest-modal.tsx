@@ -28,6 +28,7 @@ import { LogoModalSVG } from 'src/shared/ui/icons/logoModalSVG'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { GuestFields } from './components/InfoSection/components/GuestFields/GuestFields'
+import { useLocation } from 'react-router-dom'
 
 type RegEventGuestModalProps = {
 	id: string
@@ -43,6 +44,8 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 	const [sendRegForm] = useSendRegistrationGuestFormMutation()
 	const [errorForm, setErrorForm] = useState<string>('')
 	const breakPoint = useBreakPoint()
+
+	const location = useLocation()
 
 	const methods = useForm<RegGuestInputs>({
 		mode: 'onBlur',
@@ -122,7 +125,7 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 		try {
 			if (isCodeAccepted) {
 				const res = (await sendRegForm(formData)) as unknown as {
-					data: { status: string; errortext: string }
+					data: { status: string; errortext: string; ticket_link?: string }
 				}
 				if (res.data.status === 'ok') {
 					toast.success('Регистрация прошла успешно!', {
@@ -134,6 +137,15 @@ export const RegEventGuestModal: FC<RegEventGuestModalProps> = ({ id }) => {
 						draggable: true,
 						progress: undefined,
 					})
+					if (location.pathname.includes('/terminal')) {
+						if (
+							res.data.ticket_link &&
+							res.data.ticket_link !== '' &&
+							res.data.ticket_link.startsWith('http')
+						) {
+							window.location.href = res.data.ticket_link
+						}
+					}
 					closeModal()
 				} else {
 					toast.error('Произошла ошибка при регистрации', {

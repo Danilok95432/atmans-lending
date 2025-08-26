@@ -38,12 +38,13 @@ export const getDayWord = (days: number): string => {
 	}
 }
 
-export const getDaysUntil = (): number => {
+export const getDaysUntil = (): string => {
 	const today = new Date()
-	const targetDate = new Date('2025-08-22')
-	const diffInMs = targetDate.getTime() - today.getTime()
-	const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24))
-	return diffInDays
+	const targetDate = new Date('2025-08-24')
+	if (today.getTime() === targetDate.getTime()) {
+		return 'Игры завершились'
+	}
+	return 'Игры начались'
 }
 
 const monthNames = [

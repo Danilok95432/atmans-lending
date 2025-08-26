@@ -29,7 +29,7 @@ export const authApi = createApi({
 			}),
 		}),
 		checkRegistrationCode: build.mutation<
-			{ status: string; errortext: string; ticket: string },
+			{ status: string; errortext: string; ticket_link?: string },
 			FieldValues
 		>({
 			query: (formData) => ({
@@ -38,15 +38,20 @@ export const authApi = createApi({
 				body: formData,
 			}),
 		}),
-		sendRegistrationForm: build.mutation<{ status: string; errortext: string }, FieldValues>({
+		sendRegistrationForm: build.mutation<
+			{ status: string; errortext: string; ticket_link: string },
+			FieldValues
+		>({
 			query: (formData) => ({
 				url: '/registration/register',
 				method: 'POST',
 				body: formData,
 			}),
 		}),
-		// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-		sendRegistrationGuestForm: build.mutation<void, FieldValues>({
+		sendRegistrationGuestForm: build.mutation<
+			{ status: string; errortext: string; ticket_link: string },
+			FieldValues
+		>({
 			query: (formData) => ({
 				url: '/registration/guest_register',
 				method: 'POST',
